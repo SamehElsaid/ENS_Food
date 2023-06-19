@@ -25,7 +25,7 @@ import React from "react";
           style={{ objectFit: "cover" }}
         />
         <div className="absolute || w-[150px] || h-[150px] || rounded-full || top-1/2 || left-1/2 || -translate-x-1/2 || -translate-y-1/2 || overflow-hidden">
-          <Image
+          <img
             src="https://static.zyda.com/cdn-cgi/image/width=256,f=auto,metadata=none/photos/restaurants/logo_urls/4830/original/80390516_2962955900382554_7936731969642037248_n_%281%29.jpeg?1677531720"
             fill
             sizes="100% ,100%"
