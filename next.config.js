@@ -6,7 +6,7 @@ const withPWA = require("next-pwa")({
 });
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  images: { domains: ["static.zyda.com"] },
+  images: { domains: ["static.zyda.com","refine-web.imgix.net"] },
   output: "standalone",
   reactStrictMode: false,
 };

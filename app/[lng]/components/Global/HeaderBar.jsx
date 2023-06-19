@@ -27,7 +27,7 @@ import React from "react";
         />
         <div className="absolute || w-[150px] || h-[150px] || rounded-full || top-1/2 || left-1/2 || -translate-x-1/2 || -translate-y-1/2 || overflow-hidden">
           <Image
-            src="https://static.zyda.com/cdn-cgi/image/width=256,f=auto,metadata=none/photos/restaurants/logo_urls/4830/original/80390516_2962955900382554_7936731969642037248_n_%281%29.jpeg?1677531720"
+            src="https://refine-web.imgix.net/blog/2022-08-17-using-next-image/social.png?w=800"
             fill
             sizes="100% ,100%"
             alt="sayed"
