@@ -17,7 +17,7 @@ import React from "react";
               </h2>
             ))}
         </div>
-        <img
+        <Image
           src="https://static.zyda.com/cdn-cgi/image/width=1200,f=auto,metadata=none/photos/restaurants/photo_urls/4830/original/WhatsApp_Image_2023-05-28_at_12.00.31_PM.jpeg?1685264645"
           fill
           sizes="100% ,100%"
@@ -25,7 +25,7 @@ import React from "react";
           style={{ objectFit: "cover" }}
         />
         <div className="absolute || w-[150px] || h-[150px] || rounded-full || top-1/2 || left-1/2 || -translate-x-1/2 || -translate-y-1/2 || overflow-hidden">
-          <img
+          <Image
             src="https://static.zyda.com/cdn-cgi/image/width=256,f=auto,metadata=none/photos/restaurants/logo_urls/4830/original/80390516_2962955900382554_7936731969642037248_n_%281%29.jpeg?1677531720"
             fill
             sizes="100% ,100%"
