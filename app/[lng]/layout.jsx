@@ -1,6 +1,5 @@
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
-// import { Footer } from "./components/Header";
 import "./../globals.css"
 import Providers from "./components/Global/Providers";
 export async function generateStaticParams() {
@@ -16,7 +15,6 @@ export default function RootLayout({ children, params: { lng } }) {
       </head>
       <body suppressHydrationWarning={true}>
         <Providers lng={lng}>{children}</Providers>
-        {/* <Footer lng={lng} /> */}
       </body>
     </html>
   );
