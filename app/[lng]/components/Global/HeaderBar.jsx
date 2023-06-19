@@ -5,7 +5,7 @@ import React from "react";
 
  function HeaderBar({ children, lng }) {
   return (
-    <div className="flex">
+    <div className="flex">``
       <div className="w-[450px] || min-w-[450px]">{children}</div>
       <div className="w-full || relative || h-screen">
         <div className={`${lng === "ar" ? "justify-end" : "justify-end" } z-10 || relative || flex `}>
@@ -17,7 +17,7 @@ import React from "react";
               </h2>
             ))}
         </div>
-        <img
+        <Image
           src="https://static.zyda.com/cdn-cgi/image/width=1200,f=auto,metadata=none/photos/restaurants/photo_urls/4830/original/WhatsApp_Image_2023-05-28_at_12.00.31_PM.jpeg?1685264645"
           fill
           sizes="100% ,100%"
