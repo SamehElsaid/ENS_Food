@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { Trans } from 'react-i18next/TransWithoutContext'
 import { languages } from '../../../i18n/settings'
 import { useTranslation } from '../../../i18n'
-export const Footer = async ({ lng }) => {
+export const Header = async ({ lng }) => {
   const { t } = await useTranslation(lng, 'footer')
   return (
-    <footer style={{ marginTop: 50 }}>
+    <footer className='bg-red-500' style={{ marginTop: 50 }}>
       <Trans i18nKey="languageSwitcher" t={t}>
         Switch from <strong>{{lng}}</strong> to:{' '}
       </Trans>

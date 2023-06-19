@@ -1,7 +1,8 @@
 import { dir } from "i18next";
 import { languages } from "../i18n/settings";
-import { Footer } from "./components/footer";
-
+// import { Footer } from "./components/Header";
+import "./../globals.css"
+import Providers from "./components/Global/Providers";
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
@@ -14,8 +15,8 @@ export default function RootLayout({ children, params: { lng } }) {
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body suppressHydrationWarning={true}>
-        <div className="">{children}</div>
-        <Footer lng={lng} />
+        <Providers lng={lng}>{children}</Providers>
+        {/* <Footer lng={lng} /> */}
       </body>
     </html>
   );
