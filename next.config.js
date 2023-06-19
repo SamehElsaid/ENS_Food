@@ -6,8 +6,9 @@ const withPWA = require("next-pwa")({
 });
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  reactStrictMode: true,
   images: { domains: ["static.zyda.com"] },
+  output: "standalone",
+  reactStrictMode: false,
 };
 
 module.exports = withPWA(nextConfig);
