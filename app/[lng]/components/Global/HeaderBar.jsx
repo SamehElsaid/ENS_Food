@@ -17,7 +17,7 @@ import React from "react";
               </h2>
             ))}
         </div>
-        <Image
+        <img
           src="https://static.zyda.com/cdn-cgi/image/width=1200,f=auto,metadata=none/photos/restaurants/photo_urls/4830/original/WhatsApp_Image_2023-05-28_at_12.00.31_PM.jpeg?1685264645"
           fill
           sizes="100% ,100%"
