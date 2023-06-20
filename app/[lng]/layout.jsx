@@ -2,11 +2,13 @@ import { dir } from "i18next";
 import { languages } from "../i18n/settings";
 import "./../globals.css"
 import Providers from "./components/Global/Providers";
+import { useTranslation } from "../i18n";
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
 
-export default function RootLayout({ children, params: { lng } }) {
+export default async function RootLayout({ children, params: { lng } }) {
+  const { t, i18n } = await useTranslation(lng);
   return (
     <html lang={lng} dir={dir(lng)}>
       <head>
@@ -14,7 +16,7 @@ export default function RootLayout({ children, params: { lng } }) {
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body suppressHydrationWarning={true}>
-        <Providers lng={lng}>{children}</Providers>
+        <Providers lng={i18n.resolvedLanguage}>{children}</Providers>
       </body>
     </html>
   );
