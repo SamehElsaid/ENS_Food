@@ -6,9 +6,9 @@ function Skeleton({ loading }) {
       className={`
                 ${
                   !loading
-                    ? "opacity-0"
-                    : "opacity-100 || transition-opacity || duration-300"
-                } || skeleton || absolute || top-1/2 || left-1/2 || -translate-x-1/2 || -translate-y-1/2 || z-10`}
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300 z-10"
+                } || skeleton || absolute || top-1/2 || left-1/2 || -translate-x-1/2 || -translate-y-1/2`}
     >
       <div className="skeleton-left">
         <div className="line h17 w40 m10"></div>

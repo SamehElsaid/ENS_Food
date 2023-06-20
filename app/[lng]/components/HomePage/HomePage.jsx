@@ -92,23 +92,6 @@ function HomePage({ data, lang, title, seeMore }) {
           resizeReInit={true}
           spaceBetween={5}
           slidesPerView={"auto"}
-        //   breakpoints={{
-        //     0: {
-        //       slidesPerView: 3,
-        //     },
-        //     640: {
-        //       slidesPerView: 3,
-        //     },
-        //     768: {
-        //       slidesPerView: 3,
-        //     },
-        //     1024: {
-        //       slidesPerView: 3,
-        //     },
-        //     1280: {
-        //       slidesPerView: 3,
-        //     },
-        //   }}
         >
           {sortedHeader.map((category, i) => (
             <SwiperSlide key={i} onClick={() => handleClick(category.id)}>
