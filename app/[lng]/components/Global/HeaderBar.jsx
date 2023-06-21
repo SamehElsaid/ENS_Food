@@ -3,40 +3,12 @@ import { languages } from "@/app/i18n/settings";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import React, { useEffect } from "react";
+import React from "react";
 import { IoSearchOutline } from "react-icons/io5";
 function HeaderBar({ children, lng }) {
   const pathName = usePathname();
   
-  useEffect(() => {
-    if (!localStorage.getItem("userLocation")) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            fetch(
-              `https://api.opencagedata.com/geocode/v1/json?key=4efc6215dd6d4f6a9fb0a93d14ded2ee&q=${latitude},${longitude}`
-            )
-              .then((response) => response.json())
-              .then((data) => {
-                localStorage.setItem(
-                  "userLocation",
-                  JSON.stringify([latitude, longitude, data.results[0]])
-                );
-              })
-              .catch((error) => {
-                console.log(error);
-              });
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      } else {
-        console.log("Geolocation is not supported by your browser.");
-      }
-    }
-  }, []);
+ 
   return (
     <div className="flex">
       <div className="w-[450px] || min-w-[450px]">{children}</div>

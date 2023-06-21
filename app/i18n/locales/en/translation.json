@@ -6,10 +6,14 @@
   "error": "Reload Page",
   "addSpecial": "Special instructions",
   "inputaddSpecial": "Add instructions",
-  "enjoy":"Enjoy the best experience with orderfast",
-  "curentPlace":"Deliver to my current location",
-  "anotherLocation":"Another location",
-  "AddtoCart":"Add to Cart",
-  "available":"This product is not available"
-
+  "enjoy": "Enjoy the best experience with orderfast",
+  "curentPlace": "Deliver to my current location",
+  "anotherLocation": "Another location",
+  "AddtoCart": "Add to Cart",
+  "available": "This product is not available",
+  "mapDrive": "We don't deliver to this address",
+  "save": "Save",
+  "searchMap": "Search for a location or an address",
+  "please": "location permissions are denied .. please allow it from your device settings",
+  "selectLoaction": "Set Delivery Location"
 }

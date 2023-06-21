@@ -106,7 +106,7 @@ function DynamicProduct({ myProduct, langWord }) {
             </span>
           </button>
           <Link
-            href="/map"
+             href={`/${langWord.lang}/map`}
             className="py-2 || block || text-center hover:bg-[#1f1f1f1f] || duration-500 || rounded-full || mt-3 || text-sm || select-none || w-full"
           >
             {langWord.anotherLocation}
