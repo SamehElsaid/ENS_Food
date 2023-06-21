@@ -1,10 +1,13 @@
-"use client"
+"use client";
 import { languages } from "@/app/i18n/settings";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React, { useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 function HeaderBar({ children, lng }) {
+  const pathName = usePathname();
+  
   useEffect(() => {
     if (!localStorage.getItem("userLocation")) {
       if (navigator.geolocation) {
@@ -52,7 +55,7 @@ function HeaderBar({ children, lng }) {
               <h2 key={tran}>
                 <Link
                   className="text-base || uppercase || font-semibold"
-                  href={`/${tran}`}
+                  href={`${pathName.split("/").map((value, index) => index === 1 ? tran : value).join("/")}`}
                 >
                   {tran === "ar" ? (
                     <svg

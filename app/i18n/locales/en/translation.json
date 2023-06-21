@@ -1,6 +1,15 @@
 {
   "title": "Delivery",
   "to-second-page": "To second page",
-  "see-more":"See more"
+  "see-more": "See more",
+  "price": "EGP",
+  "error": "Reload Page",
+  "addSpecial": "Special instructions",
+  "inputaddSpecial": "Add instructions",
+  "enjoy":"Enjoy the best experience with orderfast",
+  "curentPlace":"Deliver to my current location",
+  "anotherLocation":"Another location",
+  "AddtoCart":"Add to Cart",
+  "available":"This product is not available"
 
 }

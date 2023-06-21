@@ -1,5 +1,14 @@
 {
-    "title": "توصيل",
-    "to-second-page": "ف الصفحه التانيه",
-    "see-more":"عرض المزيد"
-  }
+  "title": "توصيل",
+  "to-second-page": "ف الصفحه التانيه",
+  "see-more": "عرض المزيد",
+  "price": "ج.م",
+  "error": "اعادة تحميل الصفحة",
+  "addSpecial": "تعليمات خاصة",
+  "inputaddSpecial": "أضف تعليمات",
+  "enjoy":"استمتع بأفضل تجربة مع Orderfast",
+  "curentPlace":"تسليم الي موقعي الحالي",
+  "anotherLocation":"موقع اخر",
+  "AddtoCart":"أضف الي السلة",
+  "available":"هذا المنتج غير متاح"
+}

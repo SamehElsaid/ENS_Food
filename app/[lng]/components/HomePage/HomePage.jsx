@@ -5,11 +5,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import Skeleton from "../Skeleton/Skeleton";
-function HomePage({ data, lang, title, seeMore }) {
+import BtnHome from "../BtnHome/BtnHome";
+function HomePage({ data, lang, title, seeMore, price, error }) {
   const containerRef = useRef(null);
   const [divId, setDivId] = useState(0);
+  const [loacalStorageLocation, setLoacalStorageLocation] = useState(false);
   const headerRef = useRef(null);
-  const [sortedHeader, setShortHead] = useState([...data.data]);
+  const [sortedHeader, setShortHead] = useState(() => {
+    if (data) {
+      return [...data.data];
+    } else {
+      return false;
+    }
+  });
+
   const swiperRef = useRef(null);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -49,7 +58,6 @@ function HomePage({ data, lang, title, seeMore }) {
       container.removeEventListener("scroll", handleScroll);
     };
   }, []);
-
   const handleClick = (id) => {
     const targetDiv = document.getElementById(id);
     if (targetDiv) {
@@ -66,50 +74,59 @@ function HomePage({ data, lang, title, seeMore }) {
   };
   useEffect(() => {
     setLoading(false);
+
+    if (localStorage.getItem("userLocation")) {
+      setLoacalStorageLocation("ok");
+    } else {
+      setLoacalStorageLocation("no");
+    }
   }, []);
   return (
     <div
       ref={containerRef}
       className="overflow-y-auto || scrollStyle || min-h-[300px] || h-screen || relative "
     >
-      <h2 className="border-b-[3px] || border-mainColor || h-[50px] || flex || items-center || justify-center || mx-4">
-        <span className="font-semibold">{title}</span>
-      </h2>
-      <div
-        ref={headerRef}
-        className="py-5 || box-shadow-edit || sticky || top-[-1px] || z-20 || bg-white ps-4 "
-      >
-        <div className="w-full">
-        <Swiper
-          className={`w-full ${
-            loading
-              ? "opacity-0"
-              : "opacity-100 || transition-opacity || duration-300"
-          }`}
-          onSwiper={(swiper) => {
-            swiperRef.current = swiper;
-          }}
-          resizeReInit={true}
-          spaceBetween={5}
-          slidesPerView={"auto"}
+      {sortedHeader && (
+        <h2 className="border-b-[3px] || border-mainColor || h-[50px] || flex || items-center || justify-center || mx-4">
+          <span className="font-semibold">{title}</span>
+        </h2>
+      )}
+      {sortedHeader && (
+        <div
+          ref={headerRef}
+          className="py-5 || box-shadow-edit || sticky || top-[-1px] || z-20 || bg-white ps-4 "
         >
-          {sortedHeader.map((category, i) => (
-            <SwiperSlide key={i} onClick={() => handleClick(category.id)}>
-              <div
-                className={`
+          <div className="w-full">
+            <Swiper
+              className={`w-full ${
+                loading
+                  ? "opacity-0"
+                  : "opacity-100 || transition-opacity || duration-300"
+              }`}
+              onSwiper={(swiper) => {
+                swiperRef.current = swiper;
+              }}
+              spaceBetween={5}
+              slidesPerView={"auto"}
+            >
+              {sortedHeader.map((category, i) => (
+                <SwiperSlide key={i} onClick={() => handleClick(category.id)}>
+                  <div
+                    className={`
             ${i === 0 ? "bg-mainColor || text-white" : "bg-mainText"}
             
-            px-3 || header || min-w-fit  || py-2  || text-sm || rounded-full || cursor-pointer`}
-                key={i}
-              >
-                {category[`${lang}_name`]}.
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            px-3 || header || min-w-fit  || py-2 || text-sm || rounded-full || cursor-pointer`}
+                    key={i}
+                  >
+                    {category[`${lang}_name`]}.
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
         </div>
-      </div>
-      {data &&
+      )}
+      {data ? (
         data.data.map((category, i) => (
           <div className="head || mx-4 |" id={category.id} key={category.id}>
             <h2 className="text-[#392200] || relative || mt-8 || mb-4 || text-[32px] || font-bold">
@@ -163,6 +180,28 @@ function HomePage({ data, lang, title, seeMore }) {
                     />
                   </div>
                 </Link>
+                <div
+                  className={`${
+                    !loacalStorageLocation
+                      ? "opacity-0 || invisible"
+                      : "opacity-100 || transition-opacity || duration-300"
+                  }`}
+                >
+                  <BtnHome>
+                    {loacalStorageLocation && loacalStorageLocation === "no" ? (
+                      <Link
+                        href={`${lang}/product/${category.id}/${meal.id}`}
+                        className="px-[16px] || inline-block || py-[6px]"
+                      >
+                        {meal.price} {price}
+                      </Link>
+                    ) : (
+                      <button className="px-[16px] || py-[6px]">
+                        {meal.price} {price}
+                      </button>
+                    )}
+                  </BtnHome>
+                </div>
               </div>
             ))}
             <Link
@@ -172,7 +211,21 @@ function HomePage({ data, lang, title, seeMore }) {
               {seeMore}
             </Link>
           </div>
-        ))}
+        ))
+      ) : (
+        <div className="flex || h-screen || box-shadow-edit || mx-4 || justify-center || items-center || py-7 || flex-1">
+          <BtnHome>
+            <button
+              onClick={() => {
+                location.reload();
+              }}
+              className="px-[16px] || py-[6px]"
+            >
+              {error}
+            </button>
+          </BtnHome>
+        </div>
+      )}
     </div>
   );
 }

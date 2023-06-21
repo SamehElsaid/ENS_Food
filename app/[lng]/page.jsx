@@ -30,5 +30,7 @@ export default async function Page({ params: { lng } }) {
   const data = await fetchData();
   const title = t("title");
   const seeMore = t("see-more");
-  return <HomePage seeMore={seeMore} data={data} title={title} lang={i18n.resolvedLanguage} />;
+  const price = t("price");
+  const error = t("error");
+  return <HomePage error={error} price={price} seeMore={seeMore} data={data} title={title} lang={i18n.resolvedLanguage} />;
 }
