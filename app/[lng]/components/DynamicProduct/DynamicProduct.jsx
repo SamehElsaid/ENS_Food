@@ -40,7 +40,11 @@ function DynamicProduct({ myProduct, langWord }) {
               .then((data) => {
                 localStorage.setItem(
                   "userLocation",
-                  JSON.stringify([latitude, longitude, data.results[0]])
+
+                  JSON.stringify({
+                    location: [latitude, longitude],
+                    place: data.results[0],
+                  })
                 );
                 setLoadingNavi(false);
               })
@@ -61,7 +65,7 @@ function DynamicProduct({ myProduct, langWord }) {
     }
   };
   return (
-    <div className="relative">
+    <div className="relative h-screen || overflow-y-scroll || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div
         className={`${
           showDrive
@@ -106,7 +110,7 @@ function DynamicProduct({ myProduct, langWord }) {
             </span>
           </button>
           <Link
-             href={`/${langWord.lang}/map`}
+            href={`/${langWord.lang}/map`}
             className="py-2 || block || text-center hover:bg-[#1f1f1f1f] || duration-500 || rounded-full || mt-3 || text-sm || select-none || w-full"
           >
             {langWord.anotherLocation}
@@ -115,15 +119,13 @@ function DynamicProduct({ myProduct, langWord }) {
       </div>
       <Link
         href={`/${langWord.lang}`}
-        className={`${
-          langWord.lang === "en" ? "left-[20px]" : "right-[20px]"
-        } absolute || top-[20px] || text-2xl || cursor-pointer || z-20`}
+        className={`px-4 || sticky || top-[20px] || text-2xl || cursor-pointer || z-20`}
       >
         {langWord.lang === "en" ? <BsArrowLeft /> : <BsArrowRight />}
       </Link>
       {myProduct ? (
-        <div className="h-screen || p-[20px] || flex || flex-col">
-          <div className="w-full || relative || h-[50vh]">
+        <div className="flex-1 || p-[20px] || flex || flex-col">
+          <div className="w-full || relative || min-h-[200px] || h-[50vh]">
             <Image
               src={myProduct.image}
               fill
@@ -136,6 +138,11 @@ function DynamicProduct({ myProduct, langWord }) {
             <p className="text-[18px] || mb-2 || font-semibold">
               {myProduct[`${langWord.lang}_name`]}
             </p>
+            {myProduct[`${langWord.lang}_description`] && (
+              <p className="text-[#6a3f01a6] || text-[14px] || font-semibold">
+                {myProduct[`${langWord.lang}_description`]}
+              </p>
+            )}
             <p className="text-[14px] || mb-2 || py-3 || border-b || border-[#e0e0e0]">
               {myProduct.price} {langWord.price}
             </p>

@@ -6,7 +6,9 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import Skeleton from "../Skeleton/Skeleton";
 import BtnHome from "../BtnHome/BtnHome";
-function HomePage({ data, lang, title, seeMore, price, error }) {
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { CiLocationOn, CiTimer } from "react-icons/ci";
+function HomePage({ data, lang, title, seeMore, price, error, arrive, time ,min}) {
   const containerRef = useRef(null);
   const [divId, setDivId] = useState(0);
   const [loacalStorageLocation, setLoacalStorageLocation] = useState(false);
@@ -74,7 +76,6 @@ function HomePage({ data, lang, title, seeMore, price, error }) {
   };
   useEffect(() => {
     setLoading(false);
-
     if (localStorage.getItem("userLocation")) {
       setLoacalStorageLocation("ok");
     } else {
@@ -91,6 +92,43 @@ function HomePage({ data, lang, title, seeMore, price, error }) {
           <span className="font-semibold">{title}</span>
         </h2>
       )}
+      {loacalStorageLocation === "ok" && (
+        <>
+          <div className="mx-4 || flex || items-center || justify-between || gap-4  || border-b || border-[#e0e0e0] || py-[12px]">
+            <div className="text-xl || text-mainColor">
+              <CiLocationOn />
+            </div>
+            <div className="flex-1">
+              <p className="text-[12px] || font-semibold || text-[#767676] || mb-0.5">
+                {arrive}
+              </p>
+              <h2 className="text-[14px]  || font-bold">
+                {JSON.parse(
+                  localStorage.getItem("userLocation")
+                ).place.formatted.replaceAll("unnamed road,", "")}
+              </h2>
+            </div>
+            <Link
+              href={`/${lang}/map`}
+              className="text-xl || text-mainColor || cursor-pointer || py-2 || pr-3"
+            >
+              {lang === "en" ? <IoIosArrowForward /> : <IoIosArrowBack />}
+            </Link>
+          </div>
+          <div className="mx-4 || flex || items-center || justify-between || gap-4  || border-b || border-[#e0e0e0] || py-[12px]">
+            <div className="text-xl || text-mainColor">
+              <CiTimer />
+            </div>
+            <div className="flex-1">
+              <p className="text-[12px] || font-semibold || text-[#767676] || mb-0.5">
+                {time}
+              </p>
+              <h2 className="text-[14px] || font-bold">25 {min}</h2>
+            </div>
+          </div>
+        </>
+      )}
+
       {sortedHeader && (
         <div
           ref={headerRef}

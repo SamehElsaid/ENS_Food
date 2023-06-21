@@ -38,6 +38,9 @@ body {
 .box-shadow-edit-map-search {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
+.sectionBoxShadow {
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+}
 .scrollContainer {
   overflow-x: auto;
   scrollbar-width: thin;
@@ -244,7 +247,7 @@ body {
   height: 48px;
   border-radius: 50%;
   position: relative;
-  animation: rotate 1s linear infinite
+  animation: rotate 1s linear infinite;
 }
 .loaderMap::before {
   content: "";
@@ -252,18 +255,30 @@ body {
   position: absolute;
   inset: 0px;
   border-radius: 50%;
-  border: 5px solid #FFF;
-  animation: prixClipFix 2s linear infinite ;
+  border: 5px solid #fff;
+  animation: prixClipFix 2s linear infinite;
 }
 
 @keyframes rotate {
-  100%   {transform: rotate(360deg)}
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes prixClipFix {
-    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
-    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
-    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
-    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
-    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0);
+  }
+  25% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0);
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%);
+  }
+  75% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 100%);
+  }
+  100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
+  }
 }

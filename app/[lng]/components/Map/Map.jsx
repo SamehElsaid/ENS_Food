@@ -30,26 +30,26 @@ const Map = ({ langWord }) => {
           )
             .then((response) => response.json())
             .then((data) => {
+              setUserLocation([latitude, longitude]);
+              const userPoint = turf.point([latitude, longitude]);
+              const tantaCoordinates = [30.786509, 31.000376];
+              const tantaPoint = turf.point(tantaCoordinates);
+              const distance = turf.distance(userPoint, tantaPoint, {
+                units: "kilometers",
+              });
+              if (distance <= 35 && distance >= 28) {
+                setErroDrive(false);
+              } else {
+                setErroDrive(true);
+              }
               localStorage.setItem(
                 "userLocation",
-                JSON.stringify([latitude, longitude, data.results[0]])
-              );
+                JSON.stringify({location:[latitude, longitude], place:data.results[0]})
+                );
             })
             .catch((error) => {
               console.log(error);
             });
-          setUserLocation([latitude, longitude]);
-          const userPoint = turf.point([latitude, longitude]);
-          const tantaCoordinates = [30.786509, 31.000376];
-          const tantaPoint = turf.point(tantaCoordinates);
-          const distance = turf.distance(userPoint, tantaPoint, {
-            units: "kilometers",
-          });
-          if (distance <= 35 && distance >= 28) {
-            setErroDrive(false);
-          } else {
-            setErroDrive(true);
-          }
         },
         (error) => {
           setPlaceOpenLoaction(true);

@@ -10,7 +10,7 @@ function HeaderBar({ children, lng }) {
   
  
   return (
-    <div className="flex">
+    <div className="flex || gap-1">
       <div className="w-[450px] || min-w-[450px]">{children}</div>
       <div className="w-full || h-screen || pt-[100px] || relative || flex || flex-col || justify-center">
         <div
@@ -53,8 +53,8 @@ function HeaderBar({ children, lng }) {
           <Image
             loading="eager"
             priority
-            src="/assets/img/home.jpg"
-            blurDataURL="/assets/img/home.jpg"
+            src="/assets/img/homePage.jpg"
+            blurDataURL="/assets/img/homePage.jpg"
             fill
             sizes="100% ,100%"
             alt="sayed"

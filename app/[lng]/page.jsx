@@ -32,5 +32,20 @@ export default async function Page({ params: { lng } }) {
   const seeMore = t("see-more");
   const price = t("price");
   const error = t("error");
-  return <HomePage error={error} price={price} seeMore={seeMore} data={data} title={title} lang={i18n.resolvedLanguage} />;
+  const arrive = t("arrive");
+  const time = t("time");
+  const min = t("min");
+  return (
+    <HomePage
+      arrive={arrive}
+      min={min}
+      time={time}
+      error={error}
+      price={price}
+      seeMore={seeMore}
+      data={data}
+      title={title}
+      lang={i18n.resolvedLanguage}
+    />
+  );
 }
