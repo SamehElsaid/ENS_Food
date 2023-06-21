@@ -206,7 +206,7 @@ function HomePage({ data, lang, title, seeMore, price, error }) {
             ))}
             <Link
               href={`${lang}/product/${category.id}`}
-              className="box-shadow-edit || block || text-mainColor || text-center || text-sm || py-2 || font-semibold || cursor-pointer"
+              className="box-shadow-edit-seeMore || block || mt-[-1px] || relative || bg-white || text-mainColor || text-center || text-sm || py-2 || font-semibold || cursor-pointer"
             >
               {seeMore}
             </Link>
