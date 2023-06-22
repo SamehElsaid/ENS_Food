@@ -75,7 +75,7 @@ function HomePage({
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
-  }, [isInView]);
+  }, []);
   const handleClick = (id) => {
     const targetDiv = document.getElementById(id);
     if (targetDiv) {
