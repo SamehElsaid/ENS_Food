@@ -25,6 +25,7 @@ async function fetchData() {
     return false;
   }
 }
+
 export default async function Page({ params: { lng } }) {
   const { t, i18n } = await useTranslation(lng);
   const data = await fetchData();

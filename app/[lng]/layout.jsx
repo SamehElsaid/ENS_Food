@@ -8,7 +8,10 @@ import NextTopLoader from "nextjs-toploader";
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
-
+export const metadata = {
+  title: "Home",
+  description: "Welcome in home page",
+};
 export default async function RootLayout({ children, params: { lng } }) {
   const { t, i18n } = await useTranslation(lng);
   return (
