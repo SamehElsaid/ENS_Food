@@ -9,12 +9,11 @@ import BtnHome from "../BtnHome/BtnHome";
 function DynamicProduct({ myProduct, langWord }) {
   const [active, setActive] = useState(false);
   const [comment, setComment] = useState("");
-  const router = useRouter();
   const [num, setNum] = useState(1);
   const [showDrive, setShowDrive] = useState(false);
   const [loadingNavi, setLoadingNavi] = useState(false);
   const popUp = useRef();
-
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const handleClickOutSide = (e) => {
       if (popUp.current && !popUp.current.contains(e.target)) {
@@ -26,6 +25,9 @@ function DynamicProduct({ myProduct, langWord }) {
       document.removeEventListener("mousedown", handleClickOutSide);
     };
   }, [popUp]);
+  useEffect(() => {
+    setLoading(true);
+  }, []);
   const searhAboutLoaction = () => {
     if (!localStorage.getItem("userLocation")) {
       setLoadingNavi(true);
@@ -67,17 +69,23 @@ function DynamicProduct({ myProduct, langWord }) {
   return (
     <div className="relative h-screen || overflow-y-scroll || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div
-        className={`${
+        className={`${!loading ? "invisible" : "visible"} ${
           showDrive
             ? "visible || opacity-100"
-            : "invisible || opacity-0 || delay-500"
-        } || overflow-hidden || transition-all || duration-500 absolute || inset-0 || bg-[#000000cc] || z-20 || flex || flex-col || justify-end`}
+            : `invisible || opacity-0 || ${loading && "delay-500"}`
+        } || overflow-hidden || transition-opacity ${
+          loading && "|| duration-500"
+        } ||  absolute || inset-0 || bg-[#000000cc] || z-20 || flex || flex-col || justify-end`}
       >
         <div
           ref={popUp}
-          className={`${
-            showDrive ? "translate-y-[0%] delay-500 " : "translate-y-[100%]"
-          } transition-transform || duration-500 bg-white || pb-10 || rounded-t-lg || rounded-tl-lg || px-3`}
+          className={`${!loading ? "invisible" : "visible"} ${
+            showDrive
+              ? `translate-y-[0%]  ${loading && "delay-500"}`
+              : "translate-y-[100%]"
+          } transition-transform ||  ${
+            loading && "|| duration-500"
+          }  bg-white || pb-10 || rounded-t-lg || rounded-tl-lg || px-3`}
         >
           <p className="w-[80px] || h-[4px] || bg-[#d9d9d9] || rounded-full || mt-2 || mb-3 || mx-auto"></p>
           <h2 className="font-bold || text-xl || pb-3 || border-b || border-[#e0e0e0] || select-none">
@@ -131,40 +139,132 @@ function DynamicProduct({ myProduct, langWord }) {
               fill
               sizes="100% ,100%"
               alt="sayed"
+              className={`${
+                !loading
+                  ? "opacity-0 || invisible"
+                  : "opacity-100 || transition-opacity || duration-300"
+              }`}
               style={{ objectFit: "contain" }}
             />
+            <div
+              className={`${
+                loading
+                  ? "opacity-0 || invisible"
+                  : "opacity-100 || transition-opacity || duration-300"
+              } absolute bg-gray-200 animate-pulse || top-0 || left-0 || duration-100 || rounded-sm  w-full || h-full`}
+            ></div>
           </div>
           <div className="flex-1">
-            <p className="text-[18px] || mb-2 || font-semibold">
-              {myProduct[`${langWord.lang}_name`]}
+            <p className="text-[18px] || my-2 || font-semibold || relative">
+              <span
+                className={`${
+                  !loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } relative`}
+              >
+                {myProduct[`${langWord.lang}_name`]}
+              </span>
+              <span
+                className={`${
+                  loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } absolute bg-gray-200 animate-pulse || top-0 || delay-75 || left-0 || duration-200 || rounded-sm  w-full || h-full`}
+              ></span>
             </p>
+
             {myProduct[`${langWord.lang}_description`] && (
-              <p className="text-[#6a3f01a6] || text-[14px] || font-semibold">
-                {myProduct[`${langWord.lang}_description`]}
+              <p className="text-[#6a3f01a6] || text-[14px] || font-semibold || relative">
+                <span
+                  className={`${
+                    !loading
+                      ? "opacity-0 || invisible"
+                      : "opacity-100 || transition-opacity || duration-300"
+                  } relative`}
+                >
+                  {myProduct[`${langWord.lang}_description`]}
+                </span>
+                <span
+                  className={`${
+                    loading
+                      ? "opacity-0 || invisible"
+                      : "opacity-100 || transition-opacity || duration-300"
+                  } absolute bg-gray-200 animate-pulse || top-0 || delay-100 || left-0 || duration-300 || rounded-sm  w-full || h-full`}
+                ></span>
               </p>
             )}
-            <p className="text-[14px] || mb-2 || py-3 || border-b || border-[#e0e0e0]">
-              {myProduct.price} {langWord.price}
+            <p className="text-[14px] || mb-2 || my-3 || border-b || border-[#e0e0e0] || relative">
+              <span
+                className={`${
+                  !loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } relative`}
+              >
+                {myProduct.price} {langWord.price}
+              </span>
+              <span
+                className={`${
+                  loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } absolute bg-gray-200 animate-pulse || top-0 || delay-100 || left-0 || duration-300 || rounded-sm  w-full || h-full`}
+              ></span>
             </p>
-            <p className="text-[14px] || mb-2 || font-semibold">
-              {langWord.addSpecial}
+            <p className="text-[14px] || mb-2 || font-semibold || relative">
+              <span
+                className={`${
+                  !loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } relative`}
+              >
+                {langWord.addSpecial}
+              </span>
+              <span
+                className={`${
+                  loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } absolute bg-gray-200 animate-pulse || top-0 || delay-100 || left-0 || duration-300 || rounded-sm  w-full || h-full`}
+              ></span>
             </p>
-            <input
-              onFocus={() => setActive(true)}
-              onBlur={() => setActive(false)}
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
-              className={`${
-                active
-                  ? " text-mainColor || border || border-mainColor"
-                  : " text-black || border-transparent || border"
-              } bg-[#f5f5f5] || w-full || py-1.5 || text-[14px] || outline-none  || px-3`}
-              type="text"
-              placeholder={langWord.inputaddSpecial}
-            />
+            <div className="relative">
+              <input
+                onFocus={() => setActive(true)}
+                onBlur={() => setActive(false)}
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                className={`${
+                  !loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } relative ${
+                  active
+                    ? " text-mainColor || border || border-mainColor"
+                    : " text-black || border-transparent || border"
+                } bg-[#f5f5f5] || w-full || py-1.5 || text-[14px] || outline-none  || px-3`}
+                type="text"
+                placeholder={langWord.inputaddSpecial}
+              />
+              <span
+                className={`${
+                  loading
+                    ? "opacity-0 || invisible"
+                    : "opacity-100 || transition-opacity || duration-300"
+                } absolute bg-gray-200 animate-pulse || top-0 || left-0 || duration-200 || rounded-sm  w-full || h-full`}
+              ></span>
+            </div>
           </div>
-          <div className="flex || flex-col  || border-t || border-[#e0e0e0] || pt-4">
-            <div className="flex || items-center || justify-center">
+          <div className="flex || flex-col  || border-t || border-[#e0e0e0] || pt-4 || relative">
+            <div
+              className={`${
+                !loading
+                  ? "opacity-0 || invisible"
+                  : "opacity-100 || transition-opacity || duration-300"
+              } relative  flex || items-center || justify-center`}
+            >
               <button>
                 <AiOutlinePlusCircle className="text-xl || cursor-pointer" />
               </button>
@@ -177,10 +277,21 @@ function DynamicProduct({ myProduct, langWord }) {
             </div>
             <button
               onClick={() => setShowDrive(!showDrive)}
-              className="bg-mainColor || text-white || py-2 || rounded-full || mt-3 || select-none"
+              className={`${
+                !loading
+                  ? "opacity-0 || invisible"
+                  : "opacity-100 || transition-opacity || duration-300"
+              } relative z-10 bg-mainColor || text-white || py-2 || rounded-full || mt-3 || select-none`}
             >
               {langWord.AddtoCart}
             </button>
+            <span
+              className={`${
+                loading
+                  ? "opacity-0 || invisible"
+                  : "opacity-100 || transition-opacity || duration-300"
+              } absolute bg-gray-300 animate-pulse || top-0 || left-0 || duration-200 || rounded-sm  w-full || h-full`}
+            ></span>
           </div>
         </div>
       ) : (
