@@ -65,7 +65,7 @@ function HomePage({
         if (isInView) {
           setDivId(+id);
           if (swiperRef.current) {
-            swiperRef.current.slideTo(0); // Scroll back to the initial slide (index 0)
+            swiperRef.current.slideTo(0); 
           }
         }
       });
@@ -75,7 +75,7 @@ function HomePage({
     return () => {
       container.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [isInView]);
   const handleClick = (id) => {
     const targetDiv = document.getElementById(id);
     if (targetDiv) {
