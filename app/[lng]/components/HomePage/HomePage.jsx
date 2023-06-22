@@ -8,6 +8,10 @@ import Skeleton from "../Skeleton/Skeleton";
 import BtnHome from "../BtnHome/BtnHome";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
+import SwiperCore, { Mousewheel } from "swiper/core";
+
+SwiperCore.use([Mousewheel]);
+
 function HomePage({
   data,
   lang,
@@ -50,7 +54,6 @@ function HomePage({
       const { scrollTop, scrollHeight, clientHeight } = container;
       const divs = container.querySelectorAll(".head");
       headerRef.current.scrollLeft = 0;
-
       divs.forEach((div) => {
         const { offsetTop, offsetHeight, id } = div;
         const divTop = offsetTop - scrollTop;
@@ -61,6 +64,9 @@ function HomePage({
 
         if (isInView) {
           setDivId(+id);
+          if (swiperRef.current) {
+            swiperRef.current.slideTo(0); // Scroll back to the initial slide (index 0)
+          }
         }
       });
     };
@@ -158,6 +164,9 @@ function HomePage({
                 swiperRef.current = swiper;
               }}
               spaceBetween={5}
+              freeMode={true}
+              direction="horizontal"
+              mousewheel
               slidesPerView={"auto"}
             >
               {sortedHeader.map((category, i) => (
