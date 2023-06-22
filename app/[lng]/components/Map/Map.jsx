@@ -69,8 +69,8 @@ const Map = ({ langWord }) => {
         .then((data) => {
           localStorage.setItem(
             "userLocation",
-            JSON.stringify([userLocation[0], userLocation[1], data.results[0]])
-          );
+            JSON.stringify({location:[latitude, longitude], place:data.results[0]})
+            );
           router.push("/");
         })
         .catch((error) => {
