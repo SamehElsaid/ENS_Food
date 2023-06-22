@@ -6,6 +6,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import BtnHome from "../BtnHome/BtnHome";
+import { SendToCart } from "../SendToCart/SendToCart";
+import { toast } from "react-hot-toast";
 function DynamicProduct({ myProduct, langWord }) {
   const [active, setActive] = useState(false);
   const [comment, setComment] = useState("");
@@ -14,6 +16,7 @@ function DynamicProduct({ myProduct, langWord }) {
   const [loadingNavi, setLoadingNavi] = useState(false);
   const popUp = useRef();
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
   useEffect(() => {
     const handleClickOutSide = (e) => {
       if (popUp.current && !popUp.current.contains(e.target)) {
@@ -29,7 +32,7 @@ function DynamicProduct({ myProduct, langWord }) {
     const loadingSetTime = setTimeout(() => {
       setLoading(true);
     }, 1000);
-    return ()=> clearTimeout(loadingSetTime)
+    return () => clearTimeout(loadingSetTime);
   }, []);
   const searhAboutLoaction = () => {
     if (!localStorage.getItem("userLocation")) {
@@ -268,18 +271,37 @@ function DynamicProduct({ myProduct, langWord }) {
                   : "opacity-100 || transition-opacity || duration-300"
               } relative  flex || items-center || justify-center`}
             >
-              <button>
+              <button onClick={() => setNum(num + 1)}>
                 <AiOutlinePlusCircle className="text-xl || cursor-pointer" />
               </button>
               <p className="min-w-[30px] || px-2 || text-center || select-none">
                 {num}
               </p>
-              <button className="text-gray-400">
+              <button
+                onClick={() => {
+                  if (num !== 1) {
+                    setNum(num - 1);
+                  }
+                }}
+                className={`${num === 1 ? "text-gray-400" : ""}`}
+              >
                 <AiOutlineMinusCircle className="text-xl || cursor-pointer " />
               </button>
             </div>
             <button
-              onClick={() => setShowDrive(!showDrive)}
+              onClick={() => {
+                if (localStorage.getItem("userLocation")) {
+                  SendToCart(myProduct, num,comment);
+                  setNum(1);
+                  setComment("")
+                  toast.success(`${langWord.tocartDone}`);
+                  setTimeout(() => {
+                    router.push(`/${langWord.lang}`);
+                  }, 1000);
+                } else {
+                  setShowDrive(!showDrive);
+                }
+              }}
               className={`${
                 !loading
                   ? "opacity-0 || invisible"

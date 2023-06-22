@@ -19,5 +19,7 @@
   "selectLoaction": "Set Delivery Location",
   "arrive":"Delivering to",
   "time":"Earliest available time",
-  "min":"minutes"
+  "min":"minutes",
+  "tocartDone":"Product added"
+
 }

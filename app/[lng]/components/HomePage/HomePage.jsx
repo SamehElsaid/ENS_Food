@@ -9,6 +9,7 @@ import BtnHome from "../BtnHome/BtnHome";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import SwiperCore, { Mousewheel } from "swiper/core";
+import { SendToCart } from "../SendToCart/SendToCart";
 
 SwiperCore.use([Mousewheel]);
 
@@ -65,7 +66,7 @@ function HomePage({
         if (isInView) {
           setDivId(+id);
           if (swiperRef.current) {
-            swiperRef.current.slideTo(0); 
+            swiperRef.current.slideTo(0);
           }
         }
       });
@@ -256,7 +257,12 @@ function HomePage({
                         {meal.price} {price}
                       </Link>
                     ) : (
-                      <button className="px-[16px] || py-[6px]">
+                      <button
+                        onClick={() => {
+                          SendToCart(meal, 1);
+                        }}
+                        className="px-[16px] || py-[6px]"
+                      >
                         {meal.price} {price}
                       </button>
                     )}

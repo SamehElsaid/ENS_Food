@@ -15,9 +15,6 @@ async function fetchdProducts(product) {
 }
 export async function generateMetadata({ params }) {
   const { t, i18n } = await useTranslation(params?.lng);
-  console.log(i18n.resolvedLanguage);
-  const id = params;
-  console.log(params?.product);
   if (params?.product) {
     const res = await axios.get(
       `${process.env.API_URL}/meals/${params.product}`
@@ -46,6 +43,7 @@ async function page({ params: { lng, product } }) {
     anotherLocation: t("anotherLocation"),
     AddtoCart: t("AddtoCart"),
     available: t("available"),
+    tocartDone: t("tocartDone"),
   };
 
   return <DynamicProduct langWord={langWord} myProduct={myProduct} />;

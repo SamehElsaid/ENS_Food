@@ -4,6 +4,7 @@ import "./../globals.css";
 import Providers from "./components/Global/Providers";
 import { useTranslation } from "../i18n";
 import NextTopLoader from "nextjs-toploader";
+import { Toaster } from "react-hot-toast";
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
@@ -34,6 +35,7 @@ export default async function RootLayout({ children, params: { lng } }) {
             shadow={false}
           />
           {children}
+          <Toaster/>
         </Providers>
       </body>
     </html>
