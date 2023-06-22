@@ -20,12 +20,15 @@ function DynamicCategory({
   const [pagenationNumber, setPagenationNumber] = useState(10);
 
   useEffect(() => {
-    setLoading(false);
     if (localStorage.getItem("userLocation")) {
       setLoacalStorageLocation("ok");
     } else {
       setLoacalStorageLocation("no");
     }
+    const loadingSetTime = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(loadingSetTime);
   }, []);
   return (
     <div className="relative || scrollStyle || h-screen || overflow-y-auto">

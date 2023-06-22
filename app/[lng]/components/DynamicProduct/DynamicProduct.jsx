@@ -26,7 +26,10 @@ function DynamicProduct({ myProduct, langWord }) {
     };
   }, [popUp]);
   useEffect(() => {
-    setLoading(true);
+    const loadingSetTime = setTimeout(() => {
+      setLoading(true);
+    }, 1000);
+    return ()=> clearTimeout(loadingSetTime)
   }, []);
   const searhAboutLoaction = () => {
     if (!localStorage.getItem("userLocation")) {
