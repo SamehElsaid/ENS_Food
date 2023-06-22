@@ -8,7 +8,17 @@ import Skeleton from "../Skeleton/Skeleton";
 import BtnHome from "../BtnHome/BtnHome";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
-function HomePage({ data, lang, title, seeMore, price, error, arrive, time ,min}) {
+function HomePage({
+  data,
+  lang,
+  title,
+  seeMore,
+  price,
+  error,
+  arrive,
+  time,
+  min,
+}) {
   const containerRef = useRef(null);
   const [divId, setDivId] = useState(0);
   const [loacalStorageLocation, setLoacalStorageLocation] = useState(false);
@@ -75,12 +85,15 @@ function HomePage({ data, lang, title, seeMore, price, error, arrive, time ,min}
     }
   };
   useEffect(() => {
-    setLoading(false);
     if (localStorage.getItem("userLocation")) {
       setLoacalStorageLocation("ok");
     } else {
       setLoacalStorageLocation("no");
     }
+    const loadingSetTime = setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+    return () => clearTimeout(loadingSetTime);
   }, []);
   return (
     <div
