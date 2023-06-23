@@ -12,6 +12,7 @@ import SwiperCore, { Mousewheel } from "swiper/core";
 import { SendToCart } from "../SendToCart/SendToCart";
 import axios from "axios";
 import dynamic from "next/dynamic";
+import { toast } from "react-hot-toast";
 const BtnOrderOfCart = dynamic(
   () => import("../BtnOrderOfCart/BtnOrderOfCart"),
   { ssr: false }
@@ -211,6 +212,7 @@ function HomePage({
   useEffect(() => {
     const loadingSetTime = setTimeout(() => {
       setLoading(false);
+      toast.success("no")
     }, 1000);
     return () => clearTimeout(loadingSetTime);
   }, []);
