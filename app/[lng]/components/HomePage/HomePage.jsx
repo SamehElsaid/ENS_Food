@@ -78,7 +78,18 @@ function HomePage({
               price: res.data.price * ele.number,
               num: ele.number,
             }))
-            .catch((err) => ({ price: 0, num: 0 }))
+            .catch((err) => {
+              console.log(ele.id);
+              const localStorageProduct = JSON.parse(
+                localStorage.getItem("cart")
+              );
+              const findProduct = localStorageProduct.filter(
+                (pro) => pro.id !== ele.id
+              );
+              localStorage.setItem("cart", JSON.stringify(findProduct));
+
+              return { price: 0, num: 0 };
+            })
         )
       )
         .then((results) => {
@@ -274,7 +285,12 @@ function HomePage({
             </h2>
             {data.meal[i].data.map((meal) => (
               <div
-                className={`${loacStorageCart && loacStorageCart.find(ele=>ele.id === meal.id) ? "border-l-mainColor" :"border-transparent"} || border-l-4 || pl-[12px] || pr-4 pb-[35px] || relative  || border-b || border-[#e0e0e0]`}
+                className={`${
+                  loacStorageCart &&
+                  loacStorageCart.find((ele) => ele.id === meal.id)
+                    ? "border-l-mainColor"
+                    : "border-transparent"
+                } || border-l-4 || pl-[12px] || pr-4 pb-[35px] || relative  || border-b || border-[#e0e0e0]`}
                 key={meal.id}
               >
                 <Skeleton loading={loading} />
