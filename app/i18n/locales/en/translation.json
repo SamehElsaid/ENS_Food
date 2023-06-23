@@ -21,5 +21,7 @@
   "time": "Earliest available time",
   "min": "minutes",
   "tocartDone": "Product added",
-  "Order": "Review Order"
+  "Order": "Review Order",
+  "looking": "What are you looking for?",
+  "erroFind": "Couldn't find any results"
 }

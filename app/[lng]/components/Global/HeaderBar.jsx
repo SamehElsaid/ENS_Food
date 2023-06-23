@@ -1,4 +1,5 @@
 "use client";
+import { useTranslation } from "@/app/i18n";
 import { languages } from "@/app/i18n/settings";
 import Image from "next/image";
 import Link from "next/link";
@@ -6,8 +7,9 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
-function HeaderBar({ children, lng }) {
+async function HeaderBar({ children, lng }) {
   const pathName = usePathname();
+  const { i18n} = await useTranslation(lng);
 
   return (
     <div className="flex || gap-1 || flex-col-reverse || lg:flex-row">
@@ -28,9 +30,9 @@ function HeaderBar({ children, lng }) {
             <AiOutlineUser  className="text-2xl"/>
           </div>
           <div className="flex || items-center || gap-5">
-            <h2 className="text-2xl || cursor-pointer w-[44px] || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full">
+            <Link href={`${i18n.resolvedLanguage}/search`} className="text-2xl || cursor-pointer w-[44px] || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full">
               <IoSearchOutline />
-            </h2>
+            </Link>
             {languages
               .filter((l) => l !== lng)
               .map((tran) => (
