@@ -252,8 +252,8 @@ function HomePage({
       )}
       {data ? (
         data.data.map((category, i) => (
-          <div className="head || mx-4 |" id={category.id} key={category.id}>
-            <h2 className="text-[#392200] || relative || mt-8 || mb-4 || text-[32px] || font-bold">
+          <div className="head" id={category.id} key={category.id}>
+            <h2 className="text-[#392200] || relative || mt-8 || mx-4 || mb-4 || text-[32px] || font-bold">
               <div
                 className={`${
                   !loading
@@ -274,7 +274,7 @@ function HomePage({
             </h2>
             {data.meal[i].data.map((meal) => (
               <div
-                className="pb-[35px] || relative  || border-b || border-[#e0e0e0]"
+                className={`${loacStorageCart && loacStorageCart.find(ele=>ele.id === meal.id) ? "border-l-mainColor" :"border-transparent"} || border-l-4 || pl-[12px] || pr-4 pb-[35px] || relative  || border-b || border-[#e0e0e0]`}
                 key={meal.id}
               >
                 <Skeleton loading={loading} />
