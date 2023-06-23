@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 function BtnOrderOfCart({
@@ -11,7 +12,7 @@ function BtnOrderOfCart({
   return (
     <>
       {localStorage.getItem("userLocation") && (
-        <div className="py-2 || border-t || h-[80px] || border-[#e0e0e0]  || flex justify-center items-center || px-4 || sticky || bottom-0 || w-full || bg-white">
+        <Link href={`${lang}/cart`} className="py-2 || border-t || h-[80px] || border-[#e0e0e0]  || flex justify-center items-center || px-4 || sticky || bottom-0 || w-full || bg-white">
           <div
             className={`${
               loadingBtn
@@ -76,7 +77,7 @@ function BtnOrderOfCart({
               {lang !== "en" && <> {money} </>}
             </span>
           </button>
-        </div>
+        </Link>
       )}
     </>
   );

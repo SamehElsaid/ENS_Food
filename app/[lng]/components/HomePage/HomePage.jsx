@@ -208,6 +208,8 @@ function HomePage({
       setLoacalStorageLocation("no");
     }
     const loadingSetTime = setTimeout(() => {
+      localStorage.clear();
+
       setLoading(false);
     }, 1000);
     return () => clearTimeout(loadingSetTime);
