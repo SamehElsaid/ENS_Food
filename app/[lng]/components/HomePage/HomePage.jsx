@@ -187,8 +187,8 @@ function HomePage({
           top: Math.max(0, targetTop - 100),
           behavior: "smooth",
         });
-      }{
-        
+      }
+      {
         const container = containerRef.current;
         const targetTop = targetDiv.offsetTop;
         container.scrollTo({
@@ -198,7 +198,7 @@ function HomePage({
       }
     }
     if (swiperRef.current) {
-      swiperRef.current.slideTo(0); 
+      swiperRef.current.slideTo(0);
     }
   };
   useEffect(() => {
@@ -369,7 +369,9 @@ function HomePage({
                         href={`${lang}/product/${category.id}/${meal.id}`}
                         className="px-[16px] || inline-block || py-[6px]"
                       >
-                        {meal.price} {price}
+                        {lang === "en" && price + " "}
+                        {meal.price}
+                        {lang !== "en" && " " + price}
                       </Link>
                     ) : (
                       <button
@@ -380,7 +382,9 @@ function HomePage({
                         }}
                         className="px-[16px] || py-[6px]"
                       >
-                        {meal.price} {price}
+                        {lang === "en" && price + " "}
+                        {meal.price}
+                        {lang !== "en" && " " + price}
                       </button>
                     )}
                   </BtnHome>
