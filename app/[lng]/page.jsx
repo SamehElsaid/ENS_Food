@@ -36,6 +36,8 @@ export default async function Page({ params: { lng } }) {
   const arrive = t("arrive");
   const time = t("time");
   const min = t("min");
+  const money = t("price");
+  const Order = t("Order");
   return (
     <HomePage
       arrive={arrive}
@@ -45,7 +47,9 @@ export default async function Page({ params: { lng } }) {
       price={price}
       seeMore={seeMore}
       data={data}
+      money={money}
       title={title}
+      Order={Order}
       lang={i18n.resolvedLanguage}
     />
   );

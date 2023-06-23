@@ -282,3 +282,39 @@ body {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0);
   }
 }
+
+
+
+
+.loader2 {
+  font-size: 20px;
+  display: inline-block;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 600;
+  box-sizing: border-box;
+  text-shadow: 0 0 1px #ffffffa6, 0 0 1px #FFF, 0 0 1px #FFF;
+  letter-spacing: 2px;
+  position: relative;
+  @apply text-mainColor
+}
+.loader2::after {
+  content: 'Loading';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #ffffff8b;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  box-sizing: border-box;
+  animation: animloader 1s linear infinite;
+}
+
+@keyframes animloader {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}

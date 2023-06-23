@@ -17,9 +17,9 @@
   "searchMap": "Search for a location or an address",
   "please": "location permissions are denied .. please allow it from your device settings",
   "selectLoaction": "Set Delivery Location",
-  "arrive":"Delivering to",
-  "time":"Earliest available time",
-  "min":"minutes",
-  "tocartDone":"Product added"
-
+  "arrive": "Delivering to",
+  "time": "Earliest available time",
+  "min": "minutes",
+  "tocartDone": "Product added",
+  "Order": "Review Order"
 }

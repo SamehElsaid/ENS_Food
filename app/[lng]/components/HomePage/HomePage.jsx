@@ -10,6 +10,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { CiLocationOn, CiTimer } from "react-icons/ci";
 import SwiperCore, { Mousewheel } from "swiper/core";
 import { SendToCart } from "../SendToCart/SendToCart";
+import axios from "axios";
 
 SwiperCore.use([Mousewheel]);
 
@@ -18,6 +19,8 @@ function HomePage({
   lang,
   title,
   seeMore,
+  money,
+  Order,
   price,
   error,
   arrive,
@@ -27,6 +30,12 @@ function HomePage({
   const containerRef = useRef(null);
   const [divId, setDivId] = useState(0);
   const [loacalStorageLocation, setLoacalStorageLocation] = useState(false);
+  const [loacStorageCart, setLoacStorageCart] = useState(false);
+  const [loacStorageCartInfo, setLoacStorageCartInfo] = useState(false);
+  const swiperRef = useRef(null);
+  const [loading, setLoading] = useState(true);
+  const [loadingBtn, setLoadingBtn] = useState(true);
+  const [num,setNum]=useState(0)
   const headerRef = useRef(null);
   const [sortedHeader, setShortHead] = useState(() => {
     if (data) {
@@ -35,9 +44,58 @@ function HomePage({
       return false;
     }
   });
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem("cart"));
+    if (storedData) {
+      setLoacStorageCart(storedData);
+    }
 
-  const swiperRef = useRef(null);
-  const [loading, setLoading] = useState(true);
+    const interval = setInterval(() => {
+      const storedData = JSON.parse(localStorage.getItem("cart"));
+      if (storedData) {
+        const hasChanged = storedData.some((item, index) => {
+          return item.number !== loacStorageCart[index]?.number;
+        });
+        if (hasChanged) {
+          setLoacStorageCart(storedData);
+        }
+      }
+    }, 1000);
+    return () => clearInterval(interval);
+  }, [loacStorageCartInfo?.num , num]);
+  useEffect(() => {
+    if (loacStorageCart && loacStorageCart.length !== 0) {
+      Promise.all(
+        loacStorageCart.map((ele) =>
+          axios
+            .get(`${process.env.API_URL}/meals/${ele.id}`)
+            .then((res) => ({
+              price: res.data.price * ele.number,
+              num: ele.number,
+            }))
+            .catch((err) => ({ price: 0, num: 0 }))
+        )
+      )
+        .then((results) => {
+          const num = results.reduce((total, result) => total + result.num, 0);
+          const price = results.reduce(
+            (total, result) => total + result.price,
+            0
+          );
+          setLoacStorageCartInfo({ num, price });
+        })
+        .then((res) => {
+          setTimeout(() => {
+            setLoadingBtn(true);
+          }, 1000);
+        })
+        .catch((err) => {
+          console.log("Error fetching meal data:", err);
+          setLoacStorageCartInfo({ num: 0, price: 0 });
+        });
+    }
+  }, [loacStorageCart]);
+
   useEffect(() => {
     setTimeout(() => {
       if (divId !== 0) {
@@ -105,7 +163,7 @@ function HomePage({
   return (
     <div
       ref={containerRef}
-      className="overflow-y-auto || scrollStyle || min-h-[300px] || h-screen || relative "
+      className="overflow-y-auto || scrollStyle || min-h-[300px] || h-screen || relative"
     >
       {sortedHeader && (
         <h2 className="border-b-[3px] || border-mainColor || h-[50px] || flex || items-center || justify-center || mx-4">
@@ -260,6 +318,8 @@ function HomePage({
                       <button
                         onClick={() => {
                           SendToCart(meal, 1);
+                          setLoadingBtn(false);
+                          setNum(num+1)
                         }}
                         className="px-[16px] || py-[6px]"
                       >
@@ -292,6 +352,75 @@ function HomePage({
           </BtnHome>
         </div>
       )}
+      <div
+        // href="/cart"
+        className="py-2 || border-t || h-[80px] || border-[#e0e0e0]  || flex justify-center items-center || px-4 || sticky || bottom-0 || w-full || bg-white"
+      >
+        <div
+          className={`${
+            loadingBtn
+              ? "opacity-0 || invisible"
+              : "opacity-100 || transition-opacity || duration-300"
+          } absolute || top-1/2 || left-1/2 || -translate-x-1/2 || -translate-y-1/2`}
+        >
+          <span className="loader2">Loading</span>
+        </div>
+        <button
+          className={`${
+            loading ? "opacity-0 || invisible" : "opacity-100 || visible"
+          }  bg-mainColor  hover:bg-hovermainColor || flex || items-center || justify-between || my-2 || gap-2 || px-5 || duration-500 || text-white || py-2 || rounded-full || text-sm || select-none || w-full`}
+        >
+          <span
+            className={`${
+              !loadingBtn
+                ? "opacity-0 || invisible"
+                : "opacity-100 || transition-opacity || duration-300"
+            }  w-[100px]`}
+          >
+            <span
+              className={`${
+                !loadingBtn
+                  ? "opacity-0 || invisible"
+                  : "opacity-100 || transition-opacity || duration-300"
+              }  w-[30px] || rounded-full || h-[30px] || flex || justify-center sdssd  || items-center || bg-black/20`}
+            >
+              {loacStorageCartInfo
+                ? loacStorageCartInfo.num > 99
+                  ? lang === "en"
+                    ? "+" + 99
+                    : 99 + "+"
+                  : loacStorageCartInfo.num
+                : 0}
+            </span>
+          </span>
+          <span
+            className={`${
+              !loadingBtn
+                ? "opacity-0 || invisible"
+                : "opacity-100 || transition-opacity || duration-300"
+            } flex-1`}
+          >
+            {Order}
+          </span>
+          <span
+            className={`${
+              !loadingBtn
+                ? "opacity-0 || invisible"
+                : "opacity-100 || transition-opacity || duration-300"
+            }  w-[100px]`}
+          >
+            {lang === "en" && <>{money} </>}
+            {loacStorageCartInfo
+              ? loacStorageCartInfo.price > 999
+                ? lang === "en"
+                  ? "+" + 999
+                  : 999 + "+"
+                : loacStorageCartInfo.price
+              : 0}
+            {lang !== "en" && <> {money} </>}
+          </span>
+        </button>
+      </div>
     </div>
   );
 }
