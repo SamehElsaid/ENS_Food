@@ -212,7 +212,12 @@ function HomePage({
   useEffect(() => {
     const loadingSetTime = setTimeout(() => {
       setLoading(false);
-      toast.success("no")
+    
+      toast.custom((t) => (
+        <div className="hidden">
+         
+        </div>
+      ))
     }, 1000);
     return () => clearTimeout(loadingSetTime);
   }, []);
