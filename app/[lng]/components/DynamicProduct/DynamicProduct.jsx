@@ -73,7 +73,7 @@ function DynamicProduct({ myProduct, langWord }) {
     }
   };
   return (
-    <div className="relative h-screen || overflow-y-scroll || scrollStyle  || sectionBoxShadow || flex || flex-col">
+    <div className="relative h-screen || overflow-y-auto || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div
         className={`${!loading ? "invisible" : "visible"} ${
           showDrive

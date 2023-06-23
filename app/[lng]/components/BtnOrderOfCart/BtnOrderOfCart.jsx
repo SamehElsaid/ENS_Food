@@ -54,7 +54,7 @@ function BtnOrderOfCart({
                 !loadingBtn
                   ? "opacity-0 || invisible"
                   : "opacity-100 || transition-opacity || duration-300"
-              } flex-1`}
+              } flex-1 || whitespace-nowrap`}
             >
               {Order}
             </span>

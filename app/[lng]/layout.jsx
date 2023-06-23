@@ -15,6 +15,7 @@ export const metadata = {
 };
 export default async function RootLayout({ children, params: { lng } }) {
   const { t, i18n } = await useTranslation(lng);
+  
   return (
     <html lang={lng} dir={dir(lng)}>
       <head>

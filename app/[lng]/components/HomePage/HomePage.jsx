@@ -145,24 +145,60 @@ function HomePage({
         }
       });
     };
+    const handleScrollWindow = () => {
+      if (window.innerWidth <= 1024) {
+        const container = containerRef.current;
+        const { scrollTop, scrollHeight, clientHeight } =
+          document.documentElement;
+        const divs = container.querySelectorAll(".head");
+        headerRef.current.scrollLeft = 0;
+        divs.forEach((div) => {
+          const { offsetTop, offsetHeight, id } = div;
+          const divTop = offsetTop - scrollTop;
+          const divBottom = divTop + offsetHeight;
+          const isInView =
+            (divTop >= 0 && divTop <= clientHeight * 0.6) ||
+            (divBottom >= 0 && divBottom <= clientHeight * 0.6);
+
+          if (isInView) {
+            setDivId(+id);
+            if (swiperRef.current) {
+              swiperRef.current.slideTo(0);
+            }
+          }
+        });
+      }
+    };
     const container = containerRef.current;
     container.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScrollWindow);
     return () => {
       container.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("scroll", handleScrollWindow);
     };
   }, []);
   const handleClick = (id) => {
     const targetDiv = document.getElementById(id);
     if (targetDiv) {
-      const container = containerRef.current;
-      const targetTop = targetDiv.offsetTop;
-      container.scrollTo({
-        top: Math.max(0, targetTop - 100),
-        behavior: "smooth",
-      });
+      if (window.innerWidth <= 1024) {
+        const container = document.documentElement;
+        const targetTop = targetDiv.offsetTop;
+        container.scrollTo({
+          top: Math.max(0, targetTop - 100),
+          behavior: "smooth",
+        });
+      }{
+        
+        const container = containerRef.current;
+        const targetTop = targetDiv.offsetTop;
+        container.scrollTo({
+          top: Math.max(0, targetTop - 100),
+          behavior: "smooth",
+        });
+      }
     }
     if (swiperRef.current) {
-      swiperRef.current.slideTo(0); // Scroll back to the initial slide (index 0)
+      swiperRef.current.slideTo(0); 
     }
   };
   useEffect(() => {
@@ -179,7 +215,7 @@ function HomePage({
   return (
     <div
       ref={containerRef}
-      className="overflow-y-auto || scrollStyle || min-h-[300px] || h-screen || relative"
+      className="lg:overflow-y-auto || scrollStyle || min-h-[300px] || lg:h-screen static || lg:relative"
     >
       {sortedHeader && (
         <h2 className="border-b-[3px] || border-mainColor || h-[50px] || flex || items-center || justify-center || mx-4">
@@ -226,7 +262,7 @@ function HomePage({
       {sortedHeader && (
         <div
           ref={headerRef}
-          className="py-5 || box-shadow-edit || sticky || top-[-1px] || z-20 || bg-white ps-4 "
+          className="py-5 || box-shadow-edit || sticky || top-[60px] || lg:top-[-1px] || z-20 || bg-white ps-4 "
         >
           <div className="w-full">
             <Swiper
