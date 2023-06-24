@@ -125,6 +125,7 @@ function DynamicProduct({ myProduct, langWord }) {
           </button>
           <Link
            prefetch={false}
+
             href={`/${langWord.lang}/map`}
             className="py-2 || block || text-center hover:bg-[#1f1f1f1f] || duration-500 || rounded-full || mt-3 || text-sm || select-none || w-full"
           >
@@ -134,6 +135,7 @@ function DynamicProduct({ myProduct, langWord }) {
       </div>
       <Link
        prefetch={false}
+
         href={`/${langWord.lang}`}
         className={`px-4 || sticky || top-[20px] || text-2xl || cursor-pointer || z-20`}
       >
@@ -326,6 +328,7 @@ function DynamicProduct({ myProduct, langWord }) {
           <BtnHome>
             <Link
              prefetch={false}
+
               href={`/${langWord.lang}`}
               className="px-[16px] || py-[6px] || block"
             >

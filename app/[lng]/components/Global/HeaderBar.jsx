@@ -31,6 +31,7 @@ async function HeaderBar({ children, lng }) {
           <div className="flex || items-center || gap-5">
             <Link
              prefetch={false}
+
               href={`/${i18n.resolvedLanguage}/search`}
               className="text-2xl || cursor-pointer w-[44px] || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full"
             >
@@ -45,6 +46,7 @@ async function HeaderBar({ children, lng }) {
                 >
                   <Link
                    prefetch={false}
+
                     className="text-base || uppercase || font-semibold"
                     href={`${pathName
                       .split("/")
