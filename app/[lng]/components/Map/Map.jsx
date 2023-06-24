@@ -156,7 +156,7 @@ const Map = ({ langWord }) => {
     <div className="relative || h-screen || flex || flex-col">
       <div className="flex || justify-between || items-center || py-3 || px-4">
         <Link
-        replace
+        prefetch={false}
           as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
           className={`${

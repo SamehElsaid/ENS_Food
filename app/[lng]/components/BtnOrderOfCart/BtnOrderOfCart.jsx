@@ -14,7 +14,7 @@ function BtnOrderOfCart({
       {localStorage.getItem("userLocation") && (
         <Link
           as={`${lang}/cart`}
-          replace
+          prefetch={false}
           href={`${lang}/cart`}
           className="py-2 || border-t || h-[80px] || border-[#e0e0e0]  || flex justify-center items-center || px-4 || sticky || bottom-0 || w-full || bg-white"
         >

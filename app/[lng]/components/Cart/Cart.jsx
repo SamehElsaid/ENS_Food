@@ -82,7 +82,7 @@ function Cart({ langWord }) {
     <div className="relative h-screen || overflow-y-auto || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div className="flex || justify-between || items-center || py-3 || px-4">
         <Link
-          replace
+          prefetch={false}
           as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
           className={`${
@@ -104,7 +104,7 @@ function Cart({ langWord }) {
             <div className="relative || pb-6" key={ele.id}>
               <Link
                 as={`products/${ele.id}`}
-                replace
+                prefetch={false}
                 href={`products/${ele.id}`}
                 className="flex || gap-2 || items-center"
               >
