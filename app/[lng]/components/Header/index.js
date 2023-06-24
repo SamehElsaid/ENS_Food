@@ -15,7 +15,6 @@ export const Header = async ({ lng }) => {
             {index > 0 && (' or ')}
             <Link 
             prefetch={false}
-            as={`/${l}`}
             href={`/${l}`}
             >
               {l}
