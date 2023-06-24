@@ -82,7 +82,7 @@ function Cart({ langWord }) {
     <div className="relative h-screen || overflow-y-auto || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div className="flex || justify-between || items-center || py-3 || px-4">
         <Link
-         prefetch={false}
+         replace
 
           as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
@@ -104,7 +104,7 @@ function Cart({ langWord }) {
           dataFromServer.map((ele, i) => (
             <div className="relative || pb-6" key={ele.id}>
               <Link
-               prefetch={false}
+               replace
 
                 as={`/products/${ele.id}`}
                 href={`/products/${ele.id}`}

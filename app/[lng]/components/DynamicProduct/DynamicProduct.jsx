@@ -124,7 +124,7 @@ function DynamicProduct({ myProduct, langWord }) {
             </span>
           </button>
           <Link
-           prefetch={false}
+           replace
 
             as={`/${langWord.lang}/map`}
             href={`/${langWord.lang}/map`}
@@ -135,7 +135,7 @@ function DynamicProduct({ myProduct, langWord }) {
         </div>
       </div>
       <Link
-       prefetch={false}
+       replace
 
         as={`/${langWord.lang}`}
         href={`/${langWord.lang}`}
@@ -329,7 +329,7 @@ function DynamicProduct({ myProduct, langWord }) {
         <div className="flex || h-screen || box-shadow-edit || mx-4 || justify-center || items-center || py-7 || flex-1">
           <BtnHome>
             <Link
-prefetch={false}
+replace
               as={`/${langWord.lang}`}
               href={`/${langWord.lang}`}
               className="px-[16px] || py-[6px] || block"

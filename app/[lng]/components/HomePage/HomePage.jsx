@@ -246,7 +246,7 @@ function HomePage({
               </h2>
             </div>
             <Link
-             prefetch={false}
+             replace
               as={`/${lang}/map`}
               href={`/${lang}/map`}
               className="text-xl || text-mainColor || cursor-pointer || py-2 || pr-3"
@@ -340,7 +340,7 @@ function HomePage({
               >
                 <Skeleton loading={loading} />
                 <Link
-                 prefetch={false}
+                 replace
 
                   as={`/${lang}/product/${category.id}/${meal.id}`}
                   href={`/${lang}/product/${category.id}/${meal.id}`}
@@ -378,7 +378,7 @@ function HomePage({
                   <BtnHome>
                     {loacalStorageLocation && loacalStorageLocation === "no" ? (
                       <Link
-                       prefetch={false}
+                       replace
 
                         as={`/${lang}/product/${category.id}/${meal.id}`}
                         href={`/${lang}/product/${category.id}/${meal.id}`}
@@ -407,7 +407,7 @@ function HomePage({
               </div>
             ))}
             <Link
-             prefetch={false}
+             replace
 
               as={`/${lang}/product/${category.id}`}
               href={`/${lang}/product/${category.id}`}

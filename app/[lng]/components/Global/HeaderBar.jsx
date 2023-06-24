@@ -30,7 +30,7 @@ async function HeaderBar({ children, lng }) {
           </div>
           <div className="flex || items-center || gap-5">
             <Link
-             prefetch={false}
+             replace
 
               as={`/${i18n.resolvedLanguage}/search`}
               href={`/${i18n.resolvedLanguage}/search`}
@@ -46,7 +46,7 @@ async function HeaderBar({ children, lng }) {
                   key={tran}
                 >
                   <Link
-      prefetch={false}
+      replace
                     className="text-base || uppercase || font-semibold"
                     as={`${pathName
                       .split("/")

@@ -13,7 +13,7 @@ function BtnOrderOfCart({
     <>
       {localStorage.getItem("userLocation") && (
         <Link
-         prefetch={false}
+         replace
 
           as={`/${lang}/cart`}
           href={`/${lang}/cart`}
