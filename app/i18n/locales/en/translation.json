@@ -23,5 +23,19 @@
   "tocartDone": "Product added",
   "Order": "Review Order",
   "looking": "What are you looking for?",
-  "erroFind": "Couldn't find any results"
+  "erroFind": "Couldn't find any results",
+  "cart": "Review Cart",
+  "orderItem": "Order Items",
+  "subtotal": "Subtotal",
+  "delivery": "Delivery",
+  "total": "Total",
+  "orderfast_Checkout":"Orderfast Checkout",
+  "empty":"Your Cart is Empty",
+  "browse":"Browse products and add them to cart to place an order",
+  "ordering":"Start Ordering",
+  "phoneNumber":"Phone Number",
+  "phoneNumberInput":"Your Phone Number",
+  "continue":"Continue"
+ 
+
 }

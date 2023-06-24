@@ -54,6 +54,8 @@ function HomePage({
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("cart"));
+    const old = JSON.parse(localStorage.getItem("cart"));
+
     if (storedData) {
       setLoacStorageCart(storedData);
     }
@@ -65,6 +67,9 @@ function HomePage({
           return item.number !== loacStorageCart[index]?.number;
         });
         if (hasChanged) {
+          setLoacStorageCart(storedData);
+        }
+        if (storedData.length !== old.length) {
           setLoacStorageCart(storedData);
         }
       }

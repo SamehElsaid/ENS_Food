@@ -7,12 +7,21 @@ export const metadata = {
 async function page({ params: { lng } }) {
   const { t, i18n } = await useTranslation(lng);
   const langWord = {
-    mapDrive: t("mapDrive"),
-    save: t("save"),
-    searchMap: t("searchMap"),
     lang: i18n.resolvedLanguage,
-    please: t("please"),
-    selectLoaction: t("selectLoaction"),
+    cart: t("cart"),
+    orderItem: t("orderItem"),
+    price: t("price"),
+    subtotal: t("subtotal"),
+    delivery: t("delivery"),
+    total: t("total"),
+    orderfast_Checkout: t("orderfast_Checkout"),
+    empty: t("empty"),
+    browse: t("browse"),
+    ordering: t("ordering"),
+    enjoy: t("enjoy"),
+    phoneNumber: t("phoneNumber"),
+    phoneNumberInput: t("phoneNumberInput"),
+    continue: t("continue"),
   };
   return <Cart langWord={langWord} />;
 }
