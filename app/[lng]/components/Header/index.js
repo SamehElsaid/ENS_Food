@@ -13,7 +13,11 @@ export const Header = async ({ lng }) => {
         return (
           <span key={l}>
             {index > 0 && (' or ')}
-            <Link href={`/${l}`}>
+            <Link 
+            replace
+            as={`/${l}`}
+            href={`/${l}`}
+            >
               {l}
             </Link>
           </span>

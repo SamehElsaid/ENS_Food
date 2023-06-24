@@ -12,7 +12,12 @@ function BtnOrderOfCart({
   return (
     <>
       {localStorage.getItem("userLocation") && (
-        <Link href={`${lang}/cart`} className="py-2 || border-t || h-[80px] || border-[#e0e0e0]  || flex justify-center items-center || px-4 || sticky || bottom-0 || w-full || bg-white">
+        <Link
+          as={`${lang}/cart`}
+          replace
+          href={`${lang}/cart`}
+          className="py-2 || border-t || h-[80px] || border-[#e0e0e0]  || flex justify-center items-center || px-4 || sticky || bottom-0 || w-full || bg-white"
+        >
           <div
             className={`${
               loadingBtn

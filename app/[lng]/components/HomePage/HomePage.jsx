@@ -212,12 +212,8 @@ function HomePage({
   useEffect(() => {
     const loadingSetTime = setTimeout(() => {
       setLoading(false);
-    
-      toast.custom((t) => (
-        <div className="hidden">
-         
-        </div>
-      ))
+
+      toast.custom((t) => <div className="hidden"></div>);
     }, 1000);
     return () => clearTimeout(loadingSetTime);
   }, []);
@@ -248,6 +244,8 @@ function HomePage({
               </h2>
             </div>
             <Link
+            replace
+              as={`/${lang}/map`}
               href={`/${lang}/map`}
               className="text-xl || text-mainColor || cursor-pointer || py-2 || pr-3"
             >
@@ -340,6 +338,8 @@ function HomePage({
               >
                 <Skeleton loading={loading} />
                 <Link
+                replace
+                  as={`${lang}/product/${category.id}/${meal.id}`}
                   href={`${lang}/product/${category.id}/${meal.id}`}
                   className="flex || gap-2 || items-center"
                 >
@@ -375,6 +375,8 @@ function HomePage({
                   <BtnHome>
                     {loacalStorageLocation && loacalStorageLocation === "no" ? (
                       <Link
+                      replace
+                        as={`${lang}/product/${category.id}/${meal.id}`}
                         href={`${lang}/product/${category.id}/${meal.id}`}
                         className="px-[16px] || inline-block || py-[6px]"
                       >
@@ -401,6 +403,8 @@ function HomePage({
               </div>
             ))}
             <Link
+            replace
+              as={`${lang}/product/${category.id}`}
               href={`${lang}/product/${category.id}`}
               className="box-shadow-edit-seeMore || block || mt-[-1px] || relative || bg-white || text-mainColor || text-center || text-sm || py-2 || font-semibold || cursor-pointer"
             >
