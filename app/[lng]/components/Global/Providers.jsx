@@ -6,10 +6,23 @@ import { usePathname } from "next/navigation";
 import HeaderBar from "./HeaderBar";
 function Providers({ children, lng }) {
   const pathName = usePathname();
-
+  useEffect(() => {
+    document.querySelector(".loading-box").style.visibility = "hidden";
+    document.querySelector(".loading-box").style.opacity = "0";
+    document.querySelectorAll("a").forEach((e) => {
+      e.addEventListener("click", () => {
+        document.querySelector(".loading-box").style.visibility = "visible";
+        document.querySelector(".loading-box").style.opacity = "1";
+      });
+    });
+  }, [pathName]);
   return (
     <Provider store={store}>
-      {pathName.includes("admin")  ? (
+      <div className="loading-box">
+        <div className="loaderbar"></div>
+      </div>
+
+      {pathName.includes("admin") ? (
         <div className="">{children}</div>
       ) : (
         <HeaderBar lng={lng}>{children}</HeaderBar>

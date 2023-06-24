@@ -82,8 +82,8 @@ function Cart({ langWord }) {
     <div className="relative h-screen || overflow-y-auto || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div className="flex || justify-between || items-center || py-3 || px-4">
         <Link
-          as={`/${langWord.lang}`}
           replace
+          as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
           className={`${
             langWord.lang === "en" ? "" : ""
@@ -93,7 +93,6 @@ function Cart({ langWord }) {
         </Link>
         <p className="text-lg || font-bold">{langWord.selectLoaction}</p>
         <p
-          href={`/${langWord.lang}`}
           className={` text-2xl || cursor-pointer || opacity-0 || invisible`}
         >
           {langWord.lang === "en" ? <BsArrowLeft /> : <BsArrowRight />}
