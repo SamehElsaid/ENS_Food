@@ -51,6 +51,7 @@ function DynamicCategory({
           <Link
            prefetch={false}
 
+            as={`/${lang}`}
             href={`/${lang}`}
             className={` ${
               lang === "en" ? "" : ""
@@ -80,6 +81,7 @@ function DynamicCategory({
             <Link
              prefetch={false}
 
+              as={`/${lang}/product/${idCart}/${meal.id}`}
               href={`/${lang}/product/${idCart}/${meal.id}`}
               className="flex || gap-2 || items-center"
             >
@@ -117,6 +119,7 @@ function DynamicCategory({
                   <Link
                    prefetch={false}
 
+                    as={`/${lang}/product/${idCart}/${meal.id}`}
                     href={`/${lang}/product/${idCart}/${meal.id}`}
                     className="px-[16px] || inline-block || py-[6px]"
                   >

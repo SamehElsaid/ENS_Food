@@ -32,6 +32,7 @@ async function HeaderBar({ children, lng }) {
             <Link
              prefetch={false}
 
+              as={`/${i18n.resolvedLanguage}/search`}
               href={`/${i18n.resolvedLanguage}/search`}
               className="text-2xl || cursor-pointer w-[44px] || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full"
             >
@@ -45,9 +46,12 @@ async function HeaderBar({ children, lng }) {
                   key={tran}
                 >
                   <Link
-                   prefetch={false}
-
+      prefetch={false}
                     className="text-base || uppercase || font-semibold"
+                    as={`${pathName
+                      .split("/")
+                      .map((value, index) => (index === 1 ? tran : value))
+                      .join("/")}`}
                     href={`${pathName
                       .split("/")
                       .map((value, index) => (index === 1 ? tran : value))

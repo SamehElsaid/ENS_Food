@@ -13,6 +13,7 @@ import { SendToCart } from "../SendToCart/SendToCart";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { toast } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 const BtnOrderOfCart = dynamic(
   () => import("../BtnOrderOfCart/BtnOrderOfCart"),
   { ssr: false }
@@ -42,6 +43,7 @@ function HomePage({
   const [loadingBtn, setLoadingBtn] = useState(true);
   const [num, setNum] = useState(0);
   const headerRef = useRef(null);
+  const router = useRouter()
   const [sortedHeader, setShortHead] = useState(() => {
     if (data) {
       return [...data.data];
@@ -245,7 +247,7 @@ function HomePage({
             </div>
             <Link
              prefetch={false}
-
+              as={`/${lang}/map`}
               href={`/${lang}/map`}
               className="text-xl || text-mainColor || cursor-pointer || py-2 || pr-3"
             >
@@ -340,6 +342,7 @@ function HomePage({
                 <Link
                  prefetch={false}
 
+                  as={`/${lang}/product/${category.id}/${meal.id}`}
                   href={`/${lang}/product/${category.id}/${meal.id}`}
                   className="flex || gap-2 || items-center"
                 >
@@ -377,6 +380,7 @@ function HomePage({
                       <Link
                        prefetch={false}
 
+                        as={`/${lang}/product/${category.id}/${meal.id}`}
                         href={`/${lang}/product/${category.id}/${meal.id}`}
                         className="px-[16px] || inline-block || py-[6px]"
                       >
@@ -405,6 +409,7 @@ function HomePage({
             <Link
              prefetch={false}
 
+              as={`/${lang}/product/${category.id}`}
               href={`/${lang}/product/${category.id}`}
               className="box-shadow-edit-seeMore || block || mt-[-1px] || relative || bg-white || text-mainColor || text-center || text-sm || py-2 || font-semibold || cursor-pointer"
             >

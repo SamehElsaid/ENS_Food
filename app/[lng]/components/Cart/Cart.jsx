@@ -84,6 +84,7 @@ function Cart({ langWord }) {
         <Link
          prefetch={false}
 
+          as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
           className={`${
             langWord.lang === "en" ? "" : ""
@@ -105,6 +106,7 @@ function Cart({ langWord }) {
               <Link
                prefetch={false}
 
+                as={`/products/${ele.id}`}
                 href={`/products/${ele.id}`}
                 className="flex || gap-2 || items-center"
               >
