@@ -14,7 +14,7 @@ export const Header = async ({ lng }) => {
           <span key={l}>
             {index > 0 && (' or ')}
             <Link 
-            prefetch={false}
+             prefetch={false}
             href={`/${l}`}
             >
               {l}

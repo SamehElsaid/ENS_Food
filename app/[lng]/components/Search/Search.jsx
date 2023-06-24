@@ -64,7 +64,7 @@ function Search({ langWord }) {
     >
       <div className="flex || sticky || top-0 || bg-white || z-30 || justify-between || items-center || py-3 || px-4 || gap-5">
         <Link
-          prefetch={false}
+         prefetch={false}
           href={`/${langWord.lang}`}
           className={`${
             langWord.lang === "en" ? "" : ""
@@ -118,7 +118,7 @@ function Search({ langWord }) {
               >
                 <Skeleton loading={loading} />
                 <Link
-                prefetch={false}
+                 prefetch={false}
                   href={`/${langWord.lang}/product/${meal.category}/${meal.id}`}
                   className="flex || gap-2 || items-center"
                 >
@@ -154,7 +154,7 @@ function Search({ langWord }) {
                   <BtnHome>
                     {loacalStorageLocation && loacalStorageLocation === "no" ? (
                       <Link
-                      prefetch={false}
+                       prefetch={false}
                         href={`/${langWord.lang}/product/${meal.category}/${meal.id}`}
                         className="px-[16px] || inline-block || py-[6px]"
                       >
