@@ -9,17 +9,19 @@ function Providers({ children, lng }) {
   useEffect(() => {
     document.querySelector(".loading-box").style.visibility = "hidden";
     document.querySelector(".loading-box").style.opacity = "0";
+    document.querySelector(".loading-box .loaderbar").classList.remove("playAnimation")
     document.querySelectorAll("a").forEach((e) => {
       e.addEventListener("click", () => {
         document.querySelector(".loading-box").style.visibility = "visible";
         document.querySelector(".loading-box").style.opacity = "1";
+        document.querySelector(".loading-box .loaderbar").classList.add("playAnimation")
       });
     });
   }, [pathName]);
   return (
     <Provider store={store}>
       <div className="loading-box">
-        <div className="loaderbar"></div>
+        <div className="loaderbar playAnimation"></div>
       </div>
 
       {pathName.includes("admin") ? (

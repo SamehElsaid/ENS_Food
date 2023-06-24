@@ -327,10 +327,11 @@ body {
   height: 100%;
   position: absolute;
   left: -100%;
-  animation: load 3s linear infinite;
   @apply bg-mainColor;
 }
-
+.playAnimation{
+  animation: load 3s linear infinite;
+}
 @keyframes load {
   0% {
     left: -100%;
