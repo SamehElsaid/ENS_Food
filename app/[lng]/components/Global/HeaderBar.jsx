@@ -9,8 +9,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
 async function HeaderBar({ children, lng }) {
   const pathName = usePathname();
-  const { i18n} = await useTranslation(lng);
-
+  const { i18n } = await useTranslation(lng);
   return (
     <div className="flex || gap-1 || flex-col-reverse || lg:flex-row">
       <div className=" w-full || lg:w-[450px] || min-w-[300px] || lg:min-w-[450px] ">
@@ -27,10 +26,15 @@ async function HeaderBar({ children, lng }) {
           } z-10 || fixed || lg:absolute || flex || items-center || justify-between || gap-5 || h-[60px] || lg:h-[100px] || bg-white || top-0 || w-full  || px-4 || lg:px-9 || py-3 || lg:py-6`}
         >
           <div className="w-[44px] || cursor-pointer || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full">
-            <AiOutlineUser  className="text-2xl"/>
+            <AiOutlineUser className="text-2xl" />
           </div>
           <div className="flex || items-center || gap-5">
-            <Link replace as={`${i18n.resolvedLanguage}/search`} href={`${i18n.resolvedLanguage}/search`} className="text-2xl || cursor-pointer w-[44px] || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full">
+            <Link
+              replace
+              as={`/${i18n.resolvedLanguage}/search`}
+              href={`/${i18n.resolvedLanguage}/search`}
+              className="text-2xl || cursor-pointer w-[44px] || h-[44px] || flex || items-center || justify-center || bg-[#f4f4f4] || lg:bg-transparent || rounded-full"
+            >
               <IoSearchOutline />
             </Link>
             {languages
@@ -41,7 +45,7 @@ async function HeaderBar({ children, lng }) {
                   key={tran}
                 >
                   <Link
-                  replace
+                    replace
                     className="text-base || uppercase || font-semibold"
                     as={`${pathName
                       .split("/")
