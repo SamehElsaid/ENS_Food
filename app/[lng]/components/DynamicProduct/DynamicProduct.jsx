@@ -124,7 +124,7 @@ function DynamicProduct({ myProduct, langWord }) {
             </span>
           </button>
           <Link
-            replace
+            // replace
             as={`/${langWord.lang}/map`}
             href={`/${langWord.lang}/map`}
             className="py-2 || block || text-center hover:bg-[#1f1f1f1f] || duration-500 || rounded-full || mt-3 || text-sm || select-none || w-full"
@@ -134,7 +134,7 @@ function DynamicProduct({ myProduct, langWord }) {
         </div>
       </div>
       <Link
-        replace
+        // replace
         as={`/${langWord.lang}`}
         href={`/${langWord.lang}`}
         className={`px-4 || sticky || top-[20px] || text-2xl || cursor-pointer || z-20`}
@@ -327,7 +327,7 @@ function DynamicProduct({ myProduct, langWord }) {
         <div className="flex || h-screen || box-shadow-edit || mx-4 || justify-center || items-center || py-7 || flex-1">
           <BtnHome>
             <Link
-              replace
+              // replace
               as={`/${langWord.lang}`}
               href={`/${langWord.lang}`}
               className="px-[16px] || py-[6px] || block"

@@ -24,7 +24,7 @@ export default async function RootLayout({ children, params: { lng } }) {
       </head>
       <body suppressHydrationWarning={true}>
         <Providers lng={i18n.resolvedLanguage}>
-          {/* <NextTopLoader
+          <NextTopLoader
             color="#b53131"
             initialPosition={0.08}
             crawlSpeed={200}
@@ -34,7 +34,7 @@ export default async function RootLayout({ children, params: { lng } }) {
             easing="linear"
             speed={200}
             shadow={false}
-          /> */}
+          />
           {children}
           <Toaster/>
         </Providers>

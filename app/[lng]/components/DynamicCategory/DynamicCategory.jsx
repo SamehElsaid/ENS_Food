@@ -49,7 +49,7 @@ function DynamicCategory({
           } flex || justify-between || items-center || z-40 || relative || select-none || py-3`}
         >
           <Link
-           replace
+          //  replace
 
             as={`/${lang}`}
             href={`/${lang}`}
@@ -79,7 +79,7 @@ function DynamicCategory({
           >
             <Skeleton loading={loading} />
             <Link
-             replace
+            //  replace
 
               as={`/${lang}/product/${idCart}/${meal.id}`}
               href={`/${lang}/product/${idCart}/${meal.id}`}
@@ -117,7 +117,7 @@ function DynamicCategory({
               <BtnHome>
                 {loacalStorageLocation && loacalStorageLocation === "no" ? (
                   <Link
-                   replace
+                  //  replace
 
                     as={`/${lang}/product/${idCart}/${meal.id}`}
                     href={`/${lang}/product/${idCart}/${meal.id}`}

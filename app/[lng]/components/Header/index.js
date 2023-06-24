@@ -14,7 +14,7 @@ export const Header = async ({ lng }) => {
           <span key={l}>
             {index > 0 && (' or ')}
             <Link 
-replace
+// replace
             as={`/${l}`}
             href={`/${l}`}
             >

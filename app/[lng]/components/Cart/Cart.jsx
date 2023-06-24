@@ -109,7 +109,7 @@ function Cart({ langWord }) {
           numberOpen
             ? "visible || opacity-100"
             : "invisible || opacity-0 || delay-500"
-        } || overflow-hidden || transition-all || duration-500 absolute || inset-0 || bg-[#000000cc] || z-40 || flex || flex-col || justify-end`}
+        } || overflow-hidden || transition-all || duration-500 absolute || h-full || inset-0 || bg-[#000000cc] || z-50 || flex || flex-col || justify-end`}
       >
         <div
           ref={popUp}
@@ -173,7 +173,7 @@ function Cart({ langWord }) {
       </div>
       <div className="flex || justify-between || items-center || py-3 || px-4 || border-b || border-gray-200 || sticky || top-0 || bg-white || z-20">
         <Link
-          replace
+          // replace
           as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
           className={`${
@@ -236,7 +236,7 @@ function Cart({ langWord }) {
                   {langWord.browse}
                 </p>
                 <Link
-                  replace
+                  // replace
                   as={`/${langWord.lang}`}
                   href={`/${langWord.lang}`}
                   className={`${
