@@ -7,16 +7,35 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 import { RiShoppingCartLine } from "react-icons/ri";
 import Skeleton from "../Skeleton/Skeleton";
 import BtnNumber from "./BtnNumber";
+import {
+  PhoneAuthProvider,
+  RecaptchaVerifier,
+  signInWithCredential,
+  signInWithPhoneNumber,
+} from "firebase/auth";
+import { auth } from "@/firebase/firebase";
+import { toast } from "react-hot-toast";
 
 function Cart({ langWord }) {
   const [loacStorageCartInfo, setLoacStorageCartInfo] = useState(false);
   const [loacStorageCart, setLoacStorageCart] = useState(false);
   const [dataFromServer, setDataFromServer] = useState(false);
   const popUp = useRef();
+  const recaptchaElementRef = useRef();
   const [numberOpen, setNumberOpen] = useState(false);
   const [number, setNumber] = useState("");
   const [active, setActive] = useState(false);
-
+  const [showOtb, setShowOptb] = useState(false);
+  const [otp, setOtp] = useState("");
+  const [activeOtp, setActiveOtp] = useState(false);
+  const [tokenFound, setTokenFound] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem("tokenPh")) {
+      setTokenFound(true);
+    } else {
+      setTokenFound(false);
+    }
+  }, []);
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("cart"));
     const old = JSON.parse(localStorage.getItem("cart"));
@@ -102,11 +121,71 @@ function Cart({ langWord }) {
       document.removeEventListener("mousedown", handleClickOutSide);
     };
   }, [popUp]);
+  const OtpPhoneCon = () => {
+    if (number.length < 11) {
+      toast.error("رقم الهاتف اقل من 11 رقم");
+    } else if (number.length > 11) {
+      toast.error("رقم الهاتف أكبر من 11 رقم");
+    } else {
+      const storedData = JSON.parse(localStorage.getItem("cart"));
+      const userLocation = JSON.parse(localStorage.getItem("userLocation"));
+      // const newP = storedData.map((ele) => ({
+      //   [`${ele.id}`]: ele.number,
+      // }));
+      // const locationInfo = userLocation.place.geometry;
+      // console.log({
+      //   item: storedData,
+      //   phone: number,
+      //   lat: locationInfo.lat,
+      //   lng: locationInfo.lng,
+      // });
+     // Generate a unique ID for the container element
+    const containerId = `recaptcha-container-${Date.now()}`;
+
+    // Create a new container element for each reCAPTCHA instance
+    const recaptchaContainer = document.createElement("div");
+    recaptchaContainer.id = containerId;
+    document.body.appendChild(recaptchaContainer);
+
+    const recaptchaVerifier = new RecaptchaVerifier(containerId, {
+      size: "invisible",
+      callback: (response) => {},
+    }, auth);
+
+    signInWithPhoneNumber(auth, "+2" + number, recaptchaVerifier)
+      .then((confirmationResult) => {
+        window.confirmationResult = confirmationResult;
+        setShowOptb(true);
+        toast.success(langWord.sendCode);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        toast.error(langWord.codeSend);
+      })
+      .finally(() => {
+        // Clean up the container element after the sign-in process
+        document.body.removeChild(recaptchaContainer);
+      });
+  
+    }
+  };
+  const convertOtp = () => {
+    confirmationResult
+      .confirm(otp)
+      .then((result) => {
+        const user = result.user;
+        localStorage.setItem("tokenPh", user.accessToken);
+        setTokenFound(true);
+      })
+      .catch((error) => {
+        toast.error(langWord.invalidCode);
+      });
+  };
   return (
     <div className="relative h-screen || overflow-y-auto || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div
         className={`${
-          numberOpen
+          !numberOpen
             ? "visible || opacity-100"
             : "invisible || opacity-0 || delay-500"
         } || overflow-hidden || transition-all || duration-500 absolute || h-full || inset-0 || bg-[#000000cc] || z-50 || flex || flex-col || justify-end`}
@@ -114,8 +193,8 @@ function Cart({ langWord }) {
         <div
           ref={popUp}
           className={`${
-            numberOpen ? "translate-y-[0%] delay-500 " : "translate-y-[100%]"
-          } transition-transform || duration-500 bg-white || pb-10 || rounded-t-lg || rounded-tl-lg || px-3`}
+            !numberOpen ? "translate-y-[0%] delay-500 " : "translate-y-[100%]"
+          } transition-transform || duration-500 bg-white || relative || pb-10 || rounded-t-lg || rounded-tl-lg || px-3`}
         >
           <p className="w-[80px] || h-[4px] || bg-[#d9d9d9] || rounded-full || mt-2 || mb-3 || mx-auto"></p>
           <h2 className="font-semibold || pb-3 || border-b || border-[#e0e0e0] || select-none">
@@ -124,45 +203,75 @@ function Cart({ langWord }) {
           <h2 className="border-b-[3px] || border-mainColor || h-[50px] || flex || items-center || justify-center || mx-4 || select-none">
             {langWord.phoneNumber}
           </h2>
-          <div className="mt-4 || mx-4">
-            <input
-              onFocus={() => setActive(true)}
-              onBlur={() => setActive(false)}
-              value={number}
-              onChange={(e) => {
-                if (!isNaN(e.target.value)) {
-                  setNumber(e.target.value);
-                }
+          <div className={`${tokenFound ? "block" : "hidden"} relative`}>
+            <button
+              onClick={() => {
+                setTokenFound(false);
+                setOtp("");
+                setShowOptb(false);
+                setNumber("");
               }}
-              className={`${
-                active ? " text-mainColor" : " text-black"
-              } bg-[#f5f5f5]  ||  || w-full || py-3 || text-[14px]  || outline-none  || px-3`}
-              type="text"
-              placeholder={langWord.phoneNumberInput}
-            />
+              className="bg-hovermainColor hover:bg-mainColor || duration-500 || text-white || py-2 || rounded-full || mt-3 || text-sm || select-none || w-full"
+            >
+              {langWord.another}
+            </button>
           </div>
+          <div className={`${tokenFound ? "hidden" : "block"} relative`}>
+            <div
+              className={`${
+                showOtb ? "mb-[60px]" : "mb-[0]"
+              } || relative || z-30  transition-margin mt-4 || mx-4`}
+            >
+              <input
+                onFocus={() => setActive(true)}
+                onBlur={() => setActive(false)}
+                value={number}
+                onChange={(e) => {
+                  if (!isNaN(e.target.value)) {
+                    setNumber(e.target.value);
+                  }
+                }}
+                className={`${
+                  active ? " text-mainColor" : " text-black"
+                } bg-[#f5f5f5]  ||  || w-full || py-3 || text-[14px]  || outline-none  || px-3`}
+                type="text"
+                placeholder={langWord.phoneNumberInput}
+              />
+            </div>
+            <div
+              className={`${
+                showOtb
+                  ? "translate-y-[0] opacity-100 || visible"
+                  : "translate-y-[calc(-100%-15px)] || opacity-0 || invisible"
+              } transition-transform-show mt-4 || mx-4 || absolute || bottom-[calc(-100%-15px)] || left-0 || right-0 `}
+            >
+              <input
+                onFocus={() => setActiveOtp(true)}
+                onBlur={() => setActiveOtp(false)}
+                value={otp}
+                onChange={(e) => {
+                  if (!isNaN(e.target.value) && e.target.value.length <= 6) {
+                    setOtp(e.target.value);
+                  }
+                }}
+                className={`${activeOtp ? " text-mainColor" : " text-black"} ${
+                  otp.length !== 0 ? "|| text-center || active" : ""
+                } bg-[#f5f5f5]  || inputOtp || w-full || py-3 || text-[14px]  || outline-none  || px-3`}
+                type="text"
+                placeholder={langWord.receive}
+              />
+            </div>
+          </div>
+          <div id="authOtp" ref={recaptchaElementRef}></div>
           <button
             onClick={() => {
-              if (number.length < 11) {
-                toast.error("رقم الهاتف اقل من 11 رقم");
-              } else if (number.length > 11) {
-                toast.error("رقم الهاتف أكبر من 11 رقم");
+              if (tokenFound) {
               } else {
-                const storedData = JSON.parse(localStorage.getItem("cart"));
-                const userLocation = JSON.parse(
-                  localStorage.getItem("userLocation")
-                );
-                // const newP = storedData.map((ele) => ({
-                //   [`${ele.id}`]: ele.number,
-                // }));
-                console.log();
-                const locationInfo = userLocation.place.geometry;
-                console.log({
-                  item: storedData,
-                  phone: number,
-                  lat: locationInfo.lat,
-                  lng: locationInfo.lng,
-                });
+                if (showOtb) {
+                  convertOtp();
+                } else {
+                  OtpPhoneCon();
+                }
               }
             }}
             className="bg-mainColor hover:bg-hovermainColor || duration-500 || text-white || py-2 || rounded-full || mt-3 || text-sm || select-none || w-full"

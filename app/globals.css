@@ -255,7 +255,28 @@ body {
   border: 5px solid #fff;
   animation: prixClipFix 2s linear infinite;
 }
-
+.inputOtp.active {
+  letter-spacing: 15px;
+  font-weight: bold;
+  text-align: center;
+}
+.transition-margin {
+  transition: margin 0.5s linear;
+}
+.transition-transform-show {
+  transition: transform 0.5s linear, visibility 0.5s linear, opacity 0.5s linear;
+}
+.inputOtp::placeholder {
+  letter-spacing: 1;
+  text-align: left;
+}
+.dashBoard {
+  background: linear-gradient(#141e30, #243b55);
+  min-height: 100vh;
+}
+.dashBoardUlActive{
+  @apply bg-[#122043] border-l-sky-600
+}
 @keyframes rotate {
   100% {
     transform: rotate(360deg);
@@ -329,7 +350,7 @@ body {
   left: -100%;
   @apply bg-mainColor;
 }
-.playAnimation{
+.playAnimation {
   animation: load 3s linear infinite;
 }
 @keyframes load {

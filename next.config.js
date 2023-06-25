@@ -12,7 +12,7 @@ const nextConfig = {
   output: "standalone",
   reactStrictMode: false,
   env: {
-    API_URL: "http://15.184.138.214:8000",
+    API_URL: "http://15.184.138.214",
   },
   // async headers() {
   //   return [

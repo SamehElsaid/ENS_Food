@@ -35,7 +35,11 @@
   "ordering": "ابدأ الطلب",
   "phoneNumber":"رقم الهاتف",
   "phoneNumberInput":"رقم الهاتف الخاص بك",
-  "continue":"أكمال"
-
+  "continue":"أكمال",
+  "receive":"سوف تستلم رمز",
+  "sendCode":"تم ارسال الكود",
+  "invalidCode":"الكود غير صحيح",
+  "codeSend":"تم ارسال الكود اكثر من مرة",
+  "another":"رقم تلفون اخر"
 
 }

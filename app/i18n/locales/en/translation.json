@@ -35,7 +35,12 @@
   "ordering":"Start Ordering",
   "phoneNumber":"Phone Number",
   "phoneNumberInput":"Your Phone Number",
-  "continue":"Continue"
- 
+  "continue":"Continue",
+  "receive":"You'll receive code",
+  "sendCode":"Code has been sent",
+  "invalidCode":"Invalid Code",
+  "codeSend":"The code has been sent more than once",
+  "another":"Another phone number"
+  
 
 }

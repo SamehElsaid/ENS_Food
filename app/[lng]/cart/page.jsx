@@ -1,6 +1,6 @@
 import React from "react";
-import Cart from "../components/Cart/Cart";
 import { useTranslation } from "@/app/i18n";
+import dynamic from "next/dynamic";
 export const metadata = {
   title: "Cart",
 };
@@ -22,7 +22,14 @@ async function page({ params: { lng } }) {
     phoneNumber: t("phoneNumber"),
     phoneNumberInput: t("phoneNumberInput"),
     continue: t("continue"),
+    receive: t("receive"),
+    sendCode: t("sendCode"),
+    invalidCode: t("invalidCode"),
+    codeSend: t("codeSend"),
+    another: t("another"),
   };
+  const Cart = dynamic(() => import("../components/Cart/Cart"), { ssr: false });
+
   return <Cart langWord={langWord} />;
 }
 
