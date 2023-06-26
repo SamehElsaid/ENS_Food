@@ -4,7 +4,7 @@ import HomePage from "./components/HomePage/HomePage";
 
 async function fetchData() {
   try {
-    const categoryResponse = await axios.get(`${process.env.API_URL}/category`);
+    const categoryResponse = await axios.get(`${process.env.API_URL}/category/`);
     const categories = categoryResponse.data.results;
 
     const mealPromises = categories.map(async (cat) => {

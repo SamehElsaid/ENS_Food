@@ -81,7 +81,7 @@ function HomePage({
       Promise.all(
         loacStorageCart.map((ele) =>
           axios
-            .get(`${process.env.API_URL}/meals/${ele.id}`)
+            .get(`${process.env.API_URL}/meals/${ele.id}/`)
             .then((res) => ({
               price: res.data.price * ele.number,
               num: ele.number,

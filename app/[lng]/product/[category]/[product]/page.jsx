@@ -6,7 +6,7 @@ import React from "react";
 // import {gen} from 'next'
 async function fetchdProducts(product) {
   try {
-    const res = await axios.get(`${process.env.API_URL}/meals/${product}`);
+    const res = await axios.get(`${process.env.API_URL}/meals/${product}/`);
     const data = res.data;
     return data;
   } catch {
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
   const { t, i18n } = await useTranslation(params?.lng);
   if (params?.product) {
     const res = await axios.get(
-      `${process.env.API_URL}/meals/${params.product}`
+      `${process.env.API_URL}/meals/${params.product}/`
     );
     const data = res.data;
 

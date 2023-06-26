@@ -64,7 +64,7 @@ function Cart({ langWord }) {
       Promise.all(
         loacStorageCart.map((ele) =>
           axios
-            .get(`${process.env.API_URL}/meals/${ele.id}`)
+            .get(`${process.env.API_URL}/meals/${ele.id}/`)
             .then((res) => {
               return {
                 ...res.data,
@@ -127,19 +127,7 @@ function Cart({ langWord }) {
     } else if (number.length > 11) {
       toast.error("رقم الهاتف أكبر من 11 رقم");
     } else {
-      const storedData = JSON.parse(localStorage.getItem("cart"));
-      const userLocation = JSON.parse(localStorage.getItem("userLocation"));
-      // const newP = storedData.map((ele) => ({
-      //   [`${ele.id}`]: ele.number,
-      // }));
-      // const locationInfo = userLocation.place.geometry;
-      // console.log({
-      //   item: storedData,
-      //   phone: number,
-      //   lat: locationInfo.lat,
-      //   lng: locationInfo.lng,
-      // });
-     // Generate a unique ID for the container element
+     
     const containerId = `recaptcha-container-${Date.now()}`;
 
     // Create a new container element for each reCAPTCHA instance
@@ -266,6 +254,37 @@ function Cart({ langWord }) {
           <button
             onClick={() => {
               if (tokenFound) {
+                const storedData = JSON.parse(localStorage.getItem("cart"));
+                const userLocation = JSON.parse(localStorage.getItem("userLocation"));
+                const locationInfo = userLocation.place.geometry;
+                const newP = storedData.map((ele) => ({
+                  [`${ele.id}`]: ele.number,comment:ele.comment
+                }));
+                console.log({
+                  item: newP,
+                  phone: number,
+                  lat: locationInfo.lat,
+                  lng: locationInfo.lng,
+                });
+                axios.post(`${process.env.API_URL}/create_order/`,{
+                  item: newP,
+                  phone: number,
+                  lat: locationInfo.lat,
+                  lng: locationInfo.lng,
+                  coupon:null
+                }).then(res=>{
+                  console.log("ok");
+                }).catch(err=>{
+                  console.log(err.message);
+                })
+                console.log(newP)
+                // // console.log({
+                //   item: storedData,
+                //   phone: number,
+                //   lat: locationInfo.lat,
+                //   lng: locationInfo.lng,
+                // });
+               // Generate a unique ID for the container element
               } else {
                 if (showOtb) {
                   convertOtp();

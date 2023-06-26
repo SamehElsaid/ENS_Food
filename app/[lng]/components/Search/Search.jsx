@@ -47,7 +47,7 @@ function Search({ langWord }) {
     } else {
       setLoading(true);
       axios
-        .get(`${process.env.API_URL}/meals/?search=${e}`)
+        .get(`${process.env.API_URL}/meals/?search=${e}/`)
         .then((res) => {
           setSearchData(res.data);
           setLoading(false);

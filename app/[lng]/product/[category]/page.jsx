@@ -5,7 +5,7 @@ import { useTranslation } from "@/app/i18n";
 async function fetchData(category) {
   try {
     const res = await axios.get(
-      `${process.env.API_URL}/meals/?category=${category}`
+      `${process.env.API_URL}/meals/?category=${category}/`
     );
     const data = res.data;
     return data;
@@ -15,7 +15,7 @@ async function fetchData(category) {
 }
 async function categoryData(category) {
   try {
-    const res = await axios.get(`${process.env.API_URL}/category/${category}`);
+    const res = await axios.get(`${process.env.API_URL}/category/${category}/`);
     const data = res.data;
     return data;
   } catch (error) {
@@ -26,7 +26,7 @@ export async function generateMetadata({ params }) {
   const { t, i18n } = await useTranslation(params?.lng);
   if (params?.category) {
     const res = await axios.get(
-      `${process.env.API_URL}/category/${params.category}`
+      `${process.env.API_URL}/category/${params.category}/`
     );
     const data = res.data;
     return {
