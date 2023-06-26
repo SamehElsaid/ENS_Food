@@ -16,7 +16,7 @@ function page() {
           alt="sayed"
           style={{ objectFit: "cover" }}
         />
-        <div className="bg-transparent || group-hover:bg-[#1c2c42] || transition-colors || duration-300 || cursor-pointer ||| absolute inset-0 flex justify-center  items-center text-white">
+        <div className="bg-transparent || group-hover:bg-sky-600 || transition-colors || duration-300 || cursor-pointer ||| absolute inset-0 flex justify-center  items-center text-white">
           <div className="text-4xl || text-transparent || group-hover:text-white || transition-colors || duration-300">
             <AiOutlineCamera />
           </div>

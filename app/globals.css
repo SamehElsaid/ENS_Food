@@ -274,8 +274,8 @@ body {
   background: linear-gradient(#141e30, #243b55);
   min-height: 100vh;
 }
-.dashBoardUlActive{
-  @apply bg-[#122043] border-l-sky-600
+.dashBoardUlActive {
+  @apply bg-[#122043] border-l-sky-600;
 }
 @keyframes rotate {
   100% {
@@ -360,4 +360,21 @@ body {
   100% {
     left: 100%;
   }
+}
+.liAnimation {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.3s ease-in, transform 0.3s ease-in;
+}
+
+/* This class defines the final state of the li elements */
+.liAnimationOpen {
+  opacity: 1;
+  transform: translateY(0);
+}
+.transition-height {
+  transition: height 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
+}
+.transition-marginUl {
+  transition: margin 0.3s cubic-bezier(0.6, -0.28, 0.735, 0.045);
 }
