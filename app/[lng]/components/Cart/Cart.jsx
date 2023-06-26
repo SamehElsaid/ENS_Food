@@ -185,7 +185,7 @@ function Cart({ langWord }) {
     <div className="relative h-screen || overflow-y-auto || scrollStyle  || sectionBoxShadow || flex || flex-col">
       <div
         className={`${
-          !numberOpen
+          numberOpen
             ? "visible || opacity-100"
             : "invisible || opacity-0 || delay-500"
         } || overflow-hidden || transition-all || duration-500 absolute || h-full || inset-0 || bg-[#000000cc] || z-50 || flex || flex-col || justify-end`}
@@ -193,7 +193,7 @@ function Cart({ langWord }) {
         <div
           ref={popUp}
           className={`${
-            !numberOpen ? "translate-y-[0%] delay-500 " : "translate-y-[100%]"
+            numberOpen ? "translate-y-[0%] delay-500 " : "translate-y-[100%]"
           } transition-transform || duration-500 bg-white || relative || pb-10 || rounded-t-lg || rounded-tl-lg || px-3`}
         >
           <p className="w-[80px] || h-[4px] || bg-[#d9d9d9] || rounded-full || mt-2 || mb-3 || mx-auto"></p>
