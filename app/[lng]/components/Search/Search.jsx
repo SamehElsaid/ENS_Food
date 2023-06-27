@@ -47,7 +47,7 @@ function Search({ langWord }) {
     } else {
       setLoading(true);
       axios
-        .get(`${process.env.API_URL}/meals/?search=${e}/`)
+        .get(`${process.env.API_URL}/meals/?search=${e}`)
         .then((res) => {
           setSearchData(res.data);
           setLoading(false);
@@ -64,8 +64,6 @@ function Search({ langWord }) {
     >
       <div className="flex || sticky || top-0 || bg-white || z-30 || justify-between || items-center || py-3 || px-4 || gap-5">
         <Link
-        //  replace
-
           as={`/${langWord.lang}`}
           href={`/${langWord.lang}`}
           className={`${

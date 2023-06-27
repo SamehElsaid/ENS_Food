@@ -258,7 +258,7 @@ function Cart({ langWord }) {
                 const userLocation = JSON.parse(localStorage.getItem("userLocation"));
                 const locationInfo = userLocation.place.geometry;
                 const newP = storedData.map((ele) => ({
-                  [`${ele.id}`]: ele.number,comment:ele.comment
+                  [`${ele.id}`]: `${ele.number}`,comment:ele.comment+"s"
                 }));
                 console.log({
                   item: newP,
@@ -268,12 +268,12 @@ function Cart({ langWord }) {
                 });
                 axios.post(`${process.env.API_URL}/create_order/`,{
                   item: newP,
-                  phone: number,
+                  phone: "01558290662",
                   lat: locationInfo.lat,
                   lng: locationInfo.lng,
                   coupon:null
                 }).then(res=>{
-                  console.log("ok");
+                  console.log(res.data);
                 }).catch(err=>{
                   console.log(err.message);
                 })

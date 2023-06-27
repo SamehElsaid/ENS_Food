@@ -5,7 +5,7 @@ import { useTranslation } from "@/app/i18n";
 async function fetchData(category) {
   try {
     const res = await axios.get(
-      `${process.env.API_URL}/meals/?category=${category}/`
+      `${process.env.API_URL}/meals/?category=${category}`
     );
     const data = res.data;
     return data;
@@ -15,7 +15,7 @@ async function fetchData(category) {
 }
 async function categoryData(category) {
   try {
-    const res = await axios.get(`${process.env.API_URL}/category/${category}/`);
+    const res = await axios.get(`${process.env.API_URL}/category/${category}`);
     const data = res.data;
     return data;
   } catch (error) {
@@ -39,7 +39,7 @@ async function page({ params: { category, lng } }) {
 
   const getMeals = await fetchData(category);
   const categoryDataDetails = await categoryData(category);
-
+  console.log(getMeals);
   const price = t("price");
   const seeMore = t("see-more");
   const seeLess = t("see-less");
@@ -48,7 +48,6 @@ async function page({ params: { category, lng } }) {
     <DynamicCategory
       seeLess={seeLess}
       seeMore={seeMore}
-      se
       categoryDataDetails={categoryDataDetails}
       getMeals={getMeals}
       price={price}

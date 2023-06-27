@@ -72,7 +72,7 @@ function DynamicCategory({
         </div>
       </div>
       <div className="pt-5 || px-4">
-        {getMeals.results.slice(0, pagenationNumber).map((meal) => (
+        {getMeals && getMeals.results.slice(0, pagenationNumber).map((meal) => (
           <div
             className="pb-[35px] || relative  || border-b || border-[#e0e0e0]"
             key={meal.id}
