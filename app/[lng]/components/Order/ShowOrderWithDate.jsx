@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import OrderItems from "./OrderItems";
 
-function ShowOrderWithDate({ order }) {
+function ShowOrderWithDate({ order, drivery }) {
   const [data, setData] = useState(false);
 
   useEffect(() => {
@@ -54,21 +54,31 @@ function ShowOrderWithDate({ order }) {
             >
               Items
             </div>
+            {drivery && (
+              <div
+                scope="col"
+                className="border-r py-4 border-gray-500 || w-[10%] max-w-[10%]"
+              >
+                Total Price
+              </div>
+            )}
             <div
               scope="col"
               className="border-r py-4 border-gray-500 || w-[10%] max-w-[10%]"
             >
-              Total Price
-            </div>
-            <div scope="col" className="py-4 w-[10%] max-w-[10%]">
               Details
             </div>
+            {!drivery && (
+              <div
+                scope="col"
+                className="border-r py-4 border-gray-500 || w-[10%] max-w-[10%]"
+              >
+                Drivery
+              </div>
+            )}
           </div>
           {data.map((item) => (
-            <OrderItems item={item} key={item.id} />
-          ))}
-          {data.map((item) => (
-            <OrderItems item={item} key={item.id} />
+            <OrderItems drivery={drivery} item={item} key={item.id} />
           ))}
         </>
       )}

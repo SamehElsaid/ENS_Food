@@ -41,6 +41,8 @@ function Cart({ langWord }) {
     const old = JSON.parse(localStorage.getItem("cart"));
     if (storedData) {
       setLoacStorageCart(storedData);
+    } else {
+      setLoacStorageCart([]);
     }
 
     const interval = setInterval(() => {
@@ -127,34 +129,35 @@ function Cart({ langWord }) {
     } else if (number.length > 11) {
       toast.error("رقم الهاتف أكبر من 11 رقم");
     } else {
-     
-    const containerId = `recaptcha-container-${Date.now()}`;
+      const containerId = `recaptcha-container-${Date.now()}`;
+      // Create a new container element for each reCAPTCHA instance
+      const recaptchaContainer = document.createElement("div");
+      recaptchaContainer.id = containerId;
+      document.body.appendChild(recaptchaContainer);
 
-    // Create a new container element for each reCAPTCHA instance
-    const recaptchaContainer = document.createElement("div");
-    recaptchaContainer.id = containerId;
-    document.body.appendChild(recaptchaContainer);
+      const recaptchaVerifier = new RecaptchaVerifier(
+        containerId,
+        {
+          size: "invisible",
+          callback: (response) => {},
+        },
+        auth
+      );
 
-    const recaptchaVerifier = new RecaptchaVerifier(containerId, {
-      size: "invisible",
-      callback: (response) => {},
-    }, auth);
-
-    signInWithPhoneNumber(auth, "+2" + number, recaptchaVerifier)
-      .then((confirmationResult) => {
-        window.confirmationResult = confirmationResult;
-        setShowOptb(true);
-        toast.success(langWord.sendCode);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        toast.error(langWord.codeSend);
-      })
-      .finally(() => {
-        // Clean up the container element after the sign-in process
-        document.body.removeChild(recaptchaContainer);
-      });
-  
+      signInWithPhoneNumber(auth, "+2" + number, recaptchaVerifier)
+        .then((confirmationResult) => {
+          window.confirmationResult = confirmationResult;
+          setShowOptb(true);
+          toast.success(langWord.sendCode);
+        })
+        .catch((err) => {
+          console.log(err.message);
+          toast.error(langWord.codeSend);
+        })
+        .finally(() => {
+          // Clean up the container element after the sign-in process
+          document.body.removeChild(recaptchaContainer);
+        });
     }
   };
   const convertOtp = () => {
@@ -163,6 +166,7 @@ function Cart({ langWord }) {
       .then((result) => {
         const user = result.user;
         localStorage.setItem("tokenPh", user.accessToken);
+        localStorage.setItem("phoneNumber", number);
         setTokenFound(true);
       })
       .catch((error) => {
@@ -255,10 +259,13 @@ function Cart({ langWord }) {
             onClick={() => {
               if (tokenFound) {
                 const storedData = JSON.parse(localStorage.getItem("cart"));
-                const userLocation = JSON.parse(localStorage.getItem("userLocation"));
+                const userLocation = JSON.parse(
+                  localStorage.getItem("userLocation")
+                );
                 const locationInfo = userLocation.place.geometry;
                 const newP = storedData.map((ele) => ({
-                  [`${ele.id}`]: `${ele.number}`,comment:ele.comment+"s"
+                  [`${ele.id}`]: `${ele.number}`,
+                  comment: ele.comment + "s",
                 }));
                 console.log({
                   item: newP,
@@ -266,25 +273,22 @@ function Cart({ langWord }) {
                   lat: locationInfo.lat,
                   lng: locationInfo.lng,
                 });
-                axios.post(`${process.env.API_URL}/create_order/`,{
-                  item: newP,
-                  phone: "01558290662",
-                  lat: locationInfo.lat,
-                  lng: locationInfo.lng,
-                  coupon:null
-                }).then(res=>{
-                  console.log(res.data);
-                }).catch(err=>{
-                  console.log(err.message);
-                })
-                console.log(newP)
-                // // console.log({
-                //   item: storedData,
-                //   phone: number,
-                //   lat: locationInfo.lat,
-                //   lng: locationInfo.lng,
-                // });
-               // Generate a unique ID for the container element
+                axios
+                  .post(`${process.env.API_URL}/create_order/`, {
+                    item: newP,
+                    phone: localStorage.getItem("phoneNumber"),
+                    lat: locationInfo.lat,
+                    lng: locationInfo.lng,
+                    coupon: null,
+                  })
+                  .then((_) => {
+                    localStorage.setItem("cart", JSON.stringify([]));
+                    toast.success("ok");
+                    setNumberOpen(false);
+                  })
+                  .catch((err) => {
+                    console.log(err.message);
+                  });
               } else {
                 if (showOtb) {
                   convertOtp();

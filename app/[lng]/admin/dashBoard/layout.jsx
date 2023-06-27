@@ -220,10 +220,10 @@ function RootLayout({ children, params: { lng } }) {
                     <h2>Orders</h2>
                   </Link>
                   <Link
-                    as={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/logo`}
-                    href={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/logo`}
+                    as={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/drivery`}
+                    href={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/drivery`}
                     className={`${
-                      myRouter === "losgo" ? "dashBoardUlActive" : ""
+                      patchName.includes("drivery")  ? "dashBoardUlActive" : ""
                     } ${style.ulDashboard}`}
                   >
                     <RiMotorbikeLine className="text-2xl" />

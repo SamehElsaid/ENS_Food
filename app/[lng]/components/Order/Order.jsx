@@ -5,7 +5,7 @@ import OrderItems from "./OrderItems";
 import { AiFillEye, AiOutlineEye } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
-function Order({ langWord }) {
+function Order({ langWord,drivery }) {
   const [TimeData, setTimeData] = useState(false);
   const router = useRouter();
   useEffect(() => {
@@ -57,7 +57,7 @@ function Order({ langWord }) {
                           <AiOutlineEye
                             onClick={() =>
                               router.push(
-                                `/${langWord.lang}/admin/dashBoard/order/${ele}`
+                                `/${langWord.lang}/admin/dashBoard/${drivery ? "drivery" : "order"}/${ele}`
                               )
                             }
                             className="text-2xl || mx-auto || cursor-pointer"
@@ -65,9 +65,7 @@ function Order({ langWord }) {
                         </td>
                       </tr>
                     ))}
-                    {/* {data.results.map((item) => (
-                      <OrderItems item={item} key={item.id} />
-                    ))} */}
+                 
                   </tbody>
                 </table>
               )}

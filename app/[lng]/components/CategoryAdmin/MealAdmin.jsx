@@ -44,25 +44,56 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
       setData((prevData) => ({ ...prevData, [name]: value }));
     }
   };
-
   const sendData = (id) => {
-    axios
-      .patch(`${process.env.API_URL}/meals/${id}/`, data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
-        },
-      })
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append("image", selectedImage);
+      axios
+        .patch(`${process.env.API_URL}/meals/${id}/`, formData, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+          },
+        })
+        .then((res) => {
+          axios
+            .patch(`${process.env.API_URL}/meals/${id}/`, data, {
+              headers: {
+                "Content-Type": "multipart/form-data",
+                Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+              },
+            })
 
-      .then((res) => {
-        console.log(res);
-        setRefersh(refersh + 1);
-        setNum(num + 1);
-        setEdit(false);
-      })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+            .then((res) => {
+              console.log(res);
+              setRefersh(refersh + 1);
+              setNum(num + 1);
+              setEdit(false);
+              setSelectedImage(null)
+            })
+            .catch((err) => {
+              toast.error(err.message);
+            });
+        });
+    } else {
+      axios
+        .patch(`${process.env.API_URL}/meals/${id}/`, data, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+          },
+        })
+
+        .then((res) => {
+          console.log(res);
+          setRefersh(refersh + 1);
+          setNum(num + 1);
+          setEdit(false);
+        })
+        .catch((err) => {
+          toast.error(err.message);
+        });
+    }
   };
   return (
     <>

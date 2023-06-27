@@ -1,9 +1,11 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
+import { toast } from "react-hot-toast";
+import { BsCheckAll } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
-function OrderItems({ item }) {
+function OrderItems({ item, drivery }) {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loactionData, setLoactiondata] = useState("");
@@ -15,9 +17,6 @@ function OrderItems({ item }) {
   useEffect(() => {
     if (item) {
       if (item.items.length !== 0) {
-        console.log("====================================");
-        console.log(item.location.split(",")[0].split(":")[1]);
-        console.log("====================================");
         fetch(
           `https://api.opencagedata.com/geocode/v1/json?key=4efc6215dd6d4f6a9fb0a93d14ded2ee&q=${
             item.location.split(",")[0].split(":")[1]
@@ -26,7 +25,7 @@ function OrderItems({ item }) {
           .then((response) => response.json())
           .then((data) => {
             setLoactiondata(data.results[0].formatted);
-          });
+          }).catch(err=>toast.error("eroo"))
         const newData = item.items.map(async (order) => {
           try {
             const res = await axios.get(
@@ -80,9 +79,6 @@ function OrderItems({ item }) {
       }
     }
   }, [categoryRef.current, item, data?.length, isOpen]);
-  console.log("====================================");
-  console.log(itemsHight);
-  console.log("====================================");
   return (
     <div className="relative">
       {item && (
@@ -100,11 +96,13 @@ function OrderItems({ item }) {
             {item.phone}
           </div>
           <div className="border-r  py-4 dark:border-neutral-500 w-[30%] max-w-[30%] ">
-            {loactionData}
+            {loactionData.replaceAll("unnamed road,", "")}
           </div>
-          <div className="border-r  py-4 dark:border-neutral-500 w-[10%] max-w-[10%] ">
-            {totalItems}
-          </div>
+          {drivery && (
+            <div className="border-r  py-4 dark:border-neutral-500 w-[10%] max-w-[10%] ">
+              {totalItems}
+            </div>
+          )}
           <div className="border-r  py-4 dark:border-neutral-500 w-[10%] max-w-[10%] ">
             {totalPrice}
           </div>
@@ -116,6 +114,13 @@ function OrderItems({ item }) {
               } transition-transform || duration-300 text-xl || mx-auto || cursor-pointer`}
             />
           </div>
+          {!drivery && (
+            <div className=" border-r py-4 dark:border-neutral-500  w-[10%] max-w-[10%] ">
+              <BsCheckAll
+                className={`transition-transform || text-green-600 || hover:text-green-800 || duration-300 text-xl || mx-auto || cursor-pointer`}
+              />
+            </div>
+          )}
         </div>
       )}
       {data && (
@@ -129,22 +134,24 @@ function OrderItems({ item }) {
           <span className="border-b cateChild font-medium dark:border-neutral-500 bg-mainColor || text-white || flex">
             <span
               scope="col"
-              className="border-r px-6 py-4 border-gray-500 || w-[calc(100%/3)] "
+              className="border-r px-6 py-4 border-gray-500 || w-full "
             >
               Name
             </span>
             <span
               scope="col"
-              className="border-r px-6 py-4 border-gray-500 || w-[calc(100%/3)] "
+              className="border-r px-6 py-4 border-gray-500 || w-full "
             >
               Quantity
             </span>
-            <span
-              scope="col"
-              className="border-r px-6 py-4 border-gray-500 || w-[calc(100%/3)] "
-            >
-              Price
-            </span>
+            {drivery && (
+              <span
+                scope="col"
+                className="border-r px-6 py-4 border-gray-500 || w-full "
+              >
+                Price
+              </span>
+            )}
           </span>
           <span className="cateChild">
             {data.map((ele, i) => (
@@ -152,15 +159,17 @@ function OrderItems({ item }) {
                 key={i}
                 className="border-b dark:border-neutral-500 || flex"
               >
-                <span className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500 w-[calc(100%/3)] ">
+                <span className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500 w-full ">
                   {ele.en_name}
                 </span>
-                <span className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 w-[calc(100%/3)] ">
+                <span className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 w-full ">
                   {ele.quantity}
                 </span>
-                <span className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 w-[calc(100%/3)] ">
-                  {ele.quantity * ele.price}
-                </span>
+                {drivery && (
+                  <span className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 w-full ">
+                    {ele.quantity * ele.price}
+                  </span>
+                )}
               </span>
             ))}
           </span>
