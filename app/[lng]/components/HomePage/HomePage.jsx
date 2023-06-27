@@ -364,11 +364,9 @@ function HomePage({
                   <div className="relative || min-w-[100px] || h-[100px]">
                     <Image
                       src={meal.image}
-                      priority
-                      blurDataURL={meal.image}
                       fill
                       sizes="100% ,100%"
-                      alt="sayed"
+                      alt={meal.id}
                       style={{ objectFit: "contain" }}
                     />
                   </div>
