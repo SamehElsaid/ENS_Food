@@ -1,15 +1,11 @@
-import dynamic from "next/dynamic";
-import React from "react";
+import { useTranslation } from "@/app/i18n";
+import AdminrRouter from "../components/Admin/AdminrRouter";
 
-function page() {
-  const Admin = dynamic(() => import("../components/Admin/Admin"), {
-    ssr: false,
-  });
-  return (
-    <div>
-      <Admin />
-    </div>
-  );
+async function page({ params }) {
+  const { t, i18n } = await useTranslation(params?.lng);
+ 
+
+  return <AdminrRouter lang={i18n.resolvedLanguage} />;
 }
 
 export default page;

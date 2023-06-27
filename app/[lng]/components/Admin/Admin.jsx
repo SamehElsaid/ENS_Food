@@ -1,10 +1,19 @@
 "use client";
+import { REFRESHDATA } from "@/redux/admin/adminSlice";
+import axios from "axios";
 import { Formik } from "formik";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { BsKeyFill } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
 import * as Yup from "yup";
-function Admin() {
+function Admin({ lang }) {
+  const patchName = usePathname();
+  const myRouter = patchName.split("/").at(-1);
+  const router = useRouter();
+  const adminSlice = useSelector((redux) => redux.admin.num);
+  const dispatch = useDispatch();
   const validationSchema = Yup.object().shape({
     userName: Yup.string()
       .min(4, "Password must be at least 6 characters")
@@ -18,7 +27,35 @@ function Admin() {
       <Formik
         initialValues={{ userName: "", password: "" }}
         onSubmit={(values, { resetForm }) => {
-          console.log(values);
+          axios
+            .post(
+              `${process.env.API_URL}/auth/login/`,
+              {
+                phone: values.userName,
+                password: values.password,
+              },
+              {
+                headers: {
+                  "x-api-key": "InHJiaPW.XK1nPOwaKGz2UdsH0ny8dWFtiuwHnWcs",
+                },
+              }
+            )
+            .then((res) => {
+              const expirationDate = new Date();
+              expirationDate.setDate(expirationDate.getDate() + 1);
+              document.cookie = `token=${
+                res.data.data.token
+              }; expires=${expirationDate.toUTCString()}`;
+              if (myRouter === "admin") {
+                router.push(`/${lang}/admin/dashBoard`);
+              }
+              resetForm();
+              dispatch(REFRESHDATA(adminSlice + 1));
+            })
+            .catch((err) => {
+              console.log(err.response); // Log the error response
+              console.log(err.message); // Log the error message
+            });
         }}
         validationSchema={validationSchema}
       >

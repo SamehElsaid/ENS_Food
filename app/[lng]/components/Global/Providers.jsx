@@ -23,7 +23,6 @@ function Providers({ children, lng }) {
     const handleBackButton = (event) => {
       event.preventDefault();
       location.reload();
-
     };
 
     window.history.pushState(null, document.title, window.location.href); // Push a new state to the history
