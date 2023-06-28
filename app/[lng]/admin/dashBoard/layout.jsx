@@ -130,7 +130,7 @@ function RootLayout({ children, params: { lng } }) {
           <div className="dashBoard || flex || flex-col">
             <div className="bg-[#1a1a1a] || py-4 || px-4 ">
               <div className="|| text-xl || font-semibold || justify-between || flex || items-center ">
-                <div className="">
+                <div className="flex || items-center || gap-3">
                   <Link
                     className="text-base || uppercase || font-semibold group || text-sky-600 || hover:text-sky-400 "
                     href={`${
@@ -173,7 +173,7 @@ function RootLayout({ children, params: { lng } }) {
                 </div>
                 <div className=" flex || items-center || gap-2 || text-sky-600 || cursor-pointer || hover:text-sky-400 || duration-500  ">
                   {lng !== "ar" && <AiOutlineLogout className="text-2xl" />}
-                  <h2>Logout</h2>
+                  <h2>{lng !== "ar" ? "Logout" : "تسجيل الخروج"}</h2>
                   {lng === "ar" && <AiOutlineLogout className="text-2xl" />}
                 </div>
               </div>
@@ -199,7 +199,7 @@ function RootLayout({ children, params: { lng } }) {
                     } ${style.ulDashboard}`}
                   >
                     <FcAddImage className="text-2xl" />
-                    <h2>Logo</h2>
+                    <h2>{lng !== "ar" ? "Logo" : "الخلفية"}</h2>
                   </Link>
                   <Link
                     as={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/logo`}
@@ -209,7 +209,7 @@ function RootLayout({ children, params: { lng } }) {
                     } ${style.ulDashboard}`}
                   >
                     <HiOutlineLocationMarker className="text-2xl" />
-                    <h2>Location</h2>
+                    <h2>{lng !== "ar" ? "Location" : "المكان"}</h2>
                   </Link>
                   <Link
                     as={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/logo`}
@@ -219,7 +219,7 @@ function RootLayout({ children, params: { lng } }) {
                     } ${style.ulDashboard}`}
                   >
                     <TbMoneybag className="text-2xl" />
-                    <h2>Price</h2>
+                    <h2> {lng !== "ar" ? "Price" : "السعر"}</h2>
                   </Link>
                   <li
                     style={{ marginBottom: isOpen ? heightCategory + "px" : 0 }}
@@ -234,7 +234,7 @@ function RootLayout({ children, params: { lng } }) {
                       } ${style.ulDashboard}   `}
                     >
                       <BiCategoryAlt className="text-2xl" />
-                      <h2>Categories</h2>
+                      <h2>{lng !== "ar" ? "Categories" : "الاقسام"}</h2>
                       <IoIosArrowDown
                         className={`${
                           isOpen ? "rotate-180" : "rotate-0"
@@ -262,7 +262,7 @@ function RootLayout({ children, params: { lng } }) {
                             : ""
                         } liAnimation || font-semibold || text-sky-500 || cateChild liAnimationOpen text-[12px] flex items-center gap-2 py-1.5 px-4 border-b border-black hover:bg-[#122043] border-l-4 hover:border-l-sky-600 border-l-transparent transition-colors duration-300 cursor-pointer`}
                       >
-                        Add Category
+                        <h2> {lng !== "ar" ? "Add Category" : "اضافه قسم"}</h2>
                       </Link>
                       {category &&
                         category.map((item, i) => (
@@ -283,7 +283,7 @@ function RootLayout({ children, params: { lng } }) {
                             }
                             liAnimation  || cateChild liAnimationOpen text-[12px] flex items-center gap-2 py-1.5 px-4 border-b border-black hover:bg-[#122043] border-l-4 hover:border-l-sky-600 border-l-transparent transition-colors duration-300 cursor-pointer`}
                           >
-                            {item.en_name}
+                            {lng !== "ar" ? item.en_name : item.ar_name}
                           </Link>
                         ))}
                     </ul>
@@ -298,7 +298,7 @@ function RootLayout({ children, params: { lng } }) {
                     } ${style.ulDashboard}`}
                   >
                     <AiOutlineShoppingCart className="text-2xl" />
-                    <h2>Orders</h2>
+                    <h2>{lng !== "ar" ? "Orders" : "الطلبات"}</h2>
                   </Link>
                   <Link
                     as={`/${
@@ -312,14 +312,13 @@ function RootLayout({ children, params: { lng } }) {
                     } ${style.ulDashboard}`}
                   >
                     <RiMotorbikeLine className="text-2xl" />
-                    <h2>Drivery</h2>
+                    <h2> {lng !== "ar" ? "Drivery" : "تم التصويل"}</h2>
                   </Link>
                 </ul>
               </div>
               <div className="flex-1 || bg-[#f3f3f2] || py-10  || px-4 || flex || flex-col">
                 <div className=" ||  flex || flex-col">
                   <h2 className="bg-white || py-2 || px-4 || rounded-t-lg || w-fit || font-semibold || font-mono || text-xl">
-                    {/* {dashBoard} */}
                     {categoryName
                       ? categoryName
                       : myRouter === "dashBoard"

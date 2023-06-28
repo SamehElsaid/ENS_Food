@@ -10,6 +10,7 @@ function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const popUp = useRef();
+
   const removeCateory = () => {
     console.log(categoryInfo);
     console.log(langWord);
@@ -47,14 +48,16 @@ function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
         className={`transition-marginUl text-sm md:text-xl ||text-green-600 hover:text-green-800 || flex || items-center || gap-2 || pt-4 || cursor-pointer || font-semibold || justify-between`}
       >
         <div className="flex || gap-2 || items-center">
-          <span>Remove This Cateory</span>
+          <span>
+            {langWord.lang !== "ar" ? "Remove This Cateory" : "مسح هذا القسم"}
+          </span>
         </div>
         <div className="">
           <button
             className={`
             bg-orange-600 hover:bg-orange-800     cursor-pointer || inline-block || duration-300 rounded-full px-3 md:px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2`}
           >
-            Remove
+            {langWord.lang !== "ar" ? "Remove" : "مسح"}
           </button>
         </div>
       </div>
@@ -103,21 +106,23 @@ function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
                 ></path>
               </svg>
               <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-                Are you sure you want to delete this product?
+                {langWord.lang !== "ar"
+                  ? " Are you sure you want to delete this Cateory?"
+                  : " هل انت متاكد من حذف هذا القسم؟ "}
               </h3>
               <button
                 onClick={removeCateory}
                 type="button"
-                className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
+                className="text-white  bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
               >
-                Yes, I'm sure
+                {langWord.lang !== "ar" ? "Yes, I'm sure" : " نعم ,انا متاكد "}
               </button>
               <button
                 onClick={() => setOpen(false)}
                 type="button"
-                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+                className="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-gray-200 rounded-lg border border-gray-200 text-sm font-medium mr-2 px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
               >
-                No, cancel
+                {langWord.lang !== "ar" ? "No, cancel" : " لا ,الغاء "}
               </button>
             </div>
           </div>

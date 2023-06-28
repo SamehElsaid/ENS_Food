@@ -10,7 +10,6 @@ function CategoryAdmin({ categoryAdmin, langWord }) {
   const [data, setData] = useState(false);
   const [loading, setLoading] = useState(false);
   const [refersh, setRefersh] = useState(0);
-
   useEffect(() => {
     axios
       .get(`${process.env.API_URL}/meals/?category=${categoryAdmin}`)
@@ -35,11 +34,13 @@ function CategoryAdmin({ categoryAdmin, langWord }) {
         setRefersh={setRefersh}
         refersh={refersh}
         categoryInfo={categoryAdmin}
+        langWord={langWord}
       />
       <AddNewMeal
         setRefersh={setRefersh}
         refersh={refersh}
         categoryInfo={categoryAdmin}
+        langWord={langWord}
       />
 
       {loading ? (
@@ -59,7 +60,7 @@ function CategoryAdmin({ categoryAdmin, langWord }) {
           </>
         ) : (
           <h2 className="text-2xl || font-semibold || text-center || py-5">
-            No Meals Found
+            {langWord.lang !== "ar" ? "No Products Found" : "لا يوجد منتجات"}
           </h2>
         )
       ) : (

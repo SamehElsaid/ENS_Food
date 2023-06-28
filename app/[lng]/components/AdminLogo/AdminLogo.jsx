@@ -4,7 +4,7 @@ import Image from "next/image";
 import { AiOutlineCamera } from "react-icons/ai";
 import axios from "axios";
 import { toast } from "react-hot-toast";
-function AdminLogo() {
+function AdminLogo({lng}) {
   const [data, setData] = useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [num, setNum] = useState(0);
@@ -40,7 +40,7 @@ function AdminLogo() {
         setNum(num + 1);
         setData(res.data);
         setSelectedImage(null);
-        toast.success("Ok");
+        toast.success(`${lng!== "ar"?"Change Image Done":"تم تغير الصوره"}`);
         setLoading(false);
       })
       .catch((erro) => {
@@ -91,12 +91,14 @@ function AdminLogo() {
             onClick={updateImg}
             className="cursor-pointer || px-10 || inline-block bg-amber-600 || hover:bg-amber-800 || duration-300 || text-white rounded-full  py-2 || mt-6 text-sm font-semibold mr-2 mb-2"
           >
-            Save
+            
+            {lng!== "ar" ? "Save" : "حفظ"}
           </div>
         )
-      ) : (
-        <h2 className="text-black || font-semibold || mt-4">
-          Click on Image To select New Image
+        ) : (
+          <h2 className="text-black || font-semibold || mt-4">
+          
+          {lng!== "ar" ? "Click on Image To select New Image" : "اضغط علي الصوره الحاليه لاختيار صوره جديدة"}
         </h2>
       )}
     </div>

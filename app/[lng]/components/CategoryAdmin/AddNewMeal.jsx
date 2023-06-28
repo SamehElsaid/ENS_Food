@@ -3,7 +3,7 @@ import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 import { AiOutlineCamera, AiOutlinePlusCircle } from "react-icons/ai";
 
-function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
+function AddNewMeal({ categoryInfo, refersh, setRefersh, langWord }) {
   const categoryRef = useRef("");
   const [isOpen, setIsOpen] = useState(false);
 
@@ -108,19 +108,21 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
       >
         <div className="flex || gap-2 || items-center">
           <AiOutlinePlusCircle className="text-3xl" />
-          <span>Add New Meal</span>
+          <span>
+            {langWord.lang !== "ar" ? "Add New Meal" : "أضافة منتج جديد"}
+          </span>
         </div>
         <div className="">
           <button
             className={`
             ${
-          isOpen
-            ? "bg-red-600 hover:bg-red-900"
-            : "bg-green-600 hover:bg-green-800"
-        } 
+              isOpen
+                ? "bg-red-600 hover:bg-red-900"
+                : "bg-green-600 hover:bg-green-800"
+            } 
             cursor-pointer || inline-block || duration-300 rounded-full px-3 md:px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2`}
           >
-            Add
+            {langWord.lang !== "ar" ? "Add" : "أضافة"}
           </button>
         </div>
       </div>
@@ -148,7 +150,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
                   required
                 />
                 <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                  EN Name
+                  {langWord.lang !== "ar" ? "EN Name" : "الاسم بالانجليزيه"}
                 </label>
               </div>
               <div
@@ -164,7 +166,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
                   required
                 />
                 <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                  AR Name
+                  {langWord.lang !== "ar" ? "AR Name" : "الاسم بالعربية"}
                 </label>
               </div>
             </div>
@@ -178,7 +180,9 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
                 name="en_description"
               ></textarea>
               <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                EN Description
+                {langWord.lang !== "ar"
+                  ? "EN Description"
+                  : "الوصف بالانجليزيه"}
               </label>
             </div>
             <div
@@ -194,7 +198,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
                 name="ar_description"
               ></textarea>
               <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                AR Description
+                {langWord.lang !== "ar" ? "AR Description" : "الوصف بالعربية"}
               </label>
             </div>
             <div className="relative h-10 w-full min-w-[200px]">
@@ -207,7 +211,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
                 onChange={handleChange}
               />
               <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                Price
+                {langWord.lang !== "ar" ? "Price" : "السعر"}
               </label>
             </div>
 
@@ -216,7 +220,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
                 type="submit"
                 className="cursor-pointer || inline-block bg-green-600 || hover:bg-green-800 || duration-300 rounded-full px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2"
               >
-                Add
+                {langWord.lang !== "ar" ? "Add" : "أضافة"}
               </button>
             </div>
           </div>

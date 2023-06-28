@@ -1,10 +1,10 @@
 import ShowOrderWithDate from '@/app/[lng]/components/Order/ShowOrderWithDate'
 import React from 'react'
 
-function page({params:{order}}) {
+function page({params:{order,lng}}) {
     
   return (
-    <ShowOrderWithDate order={order}/>
+    <ShowOrderWithDate lng={lng} order={order}/>
   )
 }
 

@@ -164,7 +164,7 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                     name="en_name"
                   />
                   <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                    EN Name
+                    {langWord.lang !== "ar" ? "EN Name" : "الأسم بالانجليزية"}
                   </label>
                 </div>
                 <div
@@ -179,7 +179,7 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                     name="ar_name"
                   />
                   <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                    AR Name
+                    {langWord.lang !== "ar" ? "AR Name" : "الأسم بالعربية"}
                   </label>
                 </div>
               </>
@@ -202,7 +202,9 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                       name="en_description"
                     ></textarea>
                     <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                      EN Description
+                      {langWord.lang !== "ar"
+                        ? "EN Description"
+                        : "الوصف بالانجليزية"}
                     </label>
                   </div>
                   <div
@@ -217,7 +219,9 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                       name="ar_description"
                     ></textarea>
                     <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                      AR Description
+                      {langWord.lang !== "ar"
+                        ? "AR Description"
+                        : "الوصف بالعربية"}
                     </label>
                   </div>
                 </>
@@ -241,7 +245,7 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                   onChange={handleChange}
                 />
                 <label className="before:content[' '] after:content[' '] pointer-events-none absolute left-0 -top-1.5 flex h-full w-full select-none text-[11px] font-normal leading-tight text-blue-gray-400 transition-all before:pointer-events-none before:mt-[6.5px] before:mr-1 before:box-border before:block before:h-1.5 before:w-2.5 before:rounded-tl-md before:border-t before:border-l before:border-blue-gray-200 before:transition-all after:pointer-events-none after:mt-[6.5px] after:ml-1 after:box-border after:block after:h-1.5 after:w-2.5 after:flex-grow after:rounded-tr-md after:border-t after:border-r after:border-blue-gray-200 after:transition-all peer-placeholder-shown:text-sm peer-placeholder-shown:leading-[3.75] peer-placeholder-shown:text-blue-gray-500 peer-placeholder-shown:before:border-transparent peer-placeholder-shown:after:border-transparent peer-focus:text-[11px] peer-focus:leading-tight peer-focus:text-pink-500 peer-focus:before:border-t-2 peer-focus:before:border-l-2 peer-focus:before:border-pink-500 peer-focus:after:border-t-2 peer-focus:after:border-r-2 peer-focus:after:border-pink-500 peer-disabled:text-transparent peer-disabled:before:border-transparent peer-disabled:after:border-transparent peer-disabled:peer-placeholder-shown:text-blue-gray-500">
-                  Price
+                  {langWord.lang !== "ar" ? "Price" : "السعر"}
                 </label>
               </div>
             )}
@@ -256,13 +260,13 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                   }}
                   className="cursor-pointer || inline-block bg-gray-200 || hover:bg-gray-400 || duration-300 ||  rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
                 >
-                  Cancel
+                  {langWord.lang !== "ar" ? "Cancel" : "الغاء"}
                 </span>
                 <span
                   onClick={() => sendData(meal.id)}
                   className="cursor-pointer || inline-block bg-amber-600 || hover:bg-amber-800 || duration-300 || text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
                 >
-                  Save
+                  {langWord.lang !== "ar" ? "Save" : "حفظ"}
                 </span>
               </>
             ) : (
@@ -270,14 +274,14 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                 onClick={() => setEdit(true)}
                 className="cursor-pointer || inline-block bg-amber-600 || hover:bg-amber-800 || duration-300 || text-white rounded-full px-3 py-1 text-sm font-semibold mr-2 mb-2"
               >
-                Edit
+                {langWord.lang !== "ar" ? "Edit" : "تعديل"}
               </span>
             )}
             <span
               onClick={() => removeMeal(meal.id)}
               className="cursor-pointer || inline-block bg-red-600 || hover:bg-red-800 || duration-300 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
             >
-              Remove
+              {langWord.lang !== "ar" ? "Remove" : "حذف"}
             </span>
           </div>
         </div>

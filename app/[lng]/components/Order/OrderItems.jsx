@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { BsCheckAll } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
-function OrderItems({ item, drivery, totalprice, refersh, setRefersh }) {
+function OrderItems({ item, drivery, totalprice, refersh, setRefersh, lng }) {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loactionData, setLoactiondata] = useState("");
@@ -17,15 +17,15 @@ function OrderItems({ item, drivery, totalprice, refersh, setRefersh }) {
     if (item) {
       if (item.items.length !== 0) {
         fetch(
-          `https://api.opencagedata.com/geocode/v1/json?key=4efc6215dd6d4f6a9fb0a93d14ded2ee&q=${
+          `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${
             item.location.split(",")[0].split(":")[1]
-          },${item.location.split(",")[1].split(":")[1]}`
+          }&lon=${item.location.split(",")[1].split(":")[1]}`
         )
           .then((response) => response.json())
           .then((data) => {
-            setLoactiondata(data.results[0].formatted);
+            setLoactiondata(data.display_name);
           })
-          .catch((err) => toast.error("eroo"));
+          .catch((err) => console.log(err.message));
         const newData = item.items.map(async (order) => {
           try {
             const res = await axios.get(
@@ -109,29 +109,39 @@ function OrderItems({ item, drivery, totalprice, refersh, setRefersh }) {
           }  || relative flex text-center || flex-col ||  lg:flex-row`}
         >
           <div className="lg:border-x  py-4 font-medium dark:border-neutral-500 lg:w-[20%] lg:max-w-[20%] flex || justify-between || flex-col || sm:flex-row  lg:justify-center ">
-            <span className="lg:hidden">Time</span>
+            <span className="lg:hidden">{lng !== "ar" ? "Time" : "الوقت"}</span>
             <span>{item.date.split(".")[0].split("T")[1]}</span>
           </div>
           <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[20%] lg:max-w-[20%] flex || justify-between || flex-col || sm:flex-row  lg:justify-center">
-            <span className="lg:hidden">Number</span>
+            <span className="lg:hidden">
+              {lng !== "ar" ? "Number" : "الرقم"}
+            </span>
             <span>{item.phone}</span>
           </div>
           <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[30%] lg:max-w-[30%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
-            <span className="lg:hidden">Location</span>
-            <span>{loactionData.replaceAll("unnamed road,", "")}</span>
+            <span className="lg:hidden">
+              {lng !== "ar" ? "Location" : "المكان"}
+            </span>
+            <span>{loactionData}</span>
           </div>
           <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
-            <span className="lg:hidden">Items</span>
+            <span className="lg:hidden">
+              {lng !== "ar" ? "Items" : "المنتجات"}
+            </span>
             <span>{totalItems}</span>
           </div>
           {drivery && (
             <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
-              <span className="lg:hidden">Total Price</span>
+              <span className="lg:hidden">
+                {lng !== "ar" ? "Total Price" : "مجموع السعر"}
+              </span>
               <span>{totalPrice}</span>
             </div>
           )}
           <div className=" lg:border-r py-4 dark:border-neutral-500  lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
-            <span className="lg:hidden">Details</span>
+            <span className="lg:hidden">
+              {lng !== "ar" ? "Details" : "التفاصيل"}
+            </span>
             <span>
               <IoIosArrowDown
                 onClick={() => setIsOpen(!isOpen)}
@@ -143,7 +153,9 @@ function OrderItems({ item, drivery, totalprice, refersh, setRefersh }) {
           </div>
           {!drivery && (
             <div className=" lg:border-r py-4 dark:border-neutral-500  lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
-              <span className="lg:hidden">Drivery</span>
+              <span className="lg:hidden">
+                {lng !== "ar" ? "Drivery" : "تم التوصيل"}
+              </span>
               <span>
                 <BsCheckAll
                   onClick={sendToDrivery}
@@ -167,20 +179,20 @@ function OrderItems({ item, drivery, totalprice, refersh, setRefersh }) {
               scope="col"
               className="border-r px-6 py-4 border-gray-500 || w-[50%] "
             >
-              Name
+              {lng !== "ar" ? "Name" : "المنتج"}
             </span>
             <span
               scope="col"
               className="border-r px-6 py-4 border-gray-500 || w-[50%] "
             >
-              Quantity
+              {lng !== "ar" ? "Quantity" : "العدد"}
             </span>
             {drivery && (
               <span
                 scope="col"
                 className="border-r px-6 py-4 border-gray-500 || w-[50%] "
               >
-                Price
+                {lng !== "ar" ? "Price" : "السعر"}
               </span>
             )}
           </span>
