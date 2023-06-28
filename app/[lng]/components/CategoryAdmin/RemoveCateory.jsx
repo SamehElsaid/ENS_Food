@@ -10,6 +10,7 @@ function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const popUp = useRef();
+  const popModal = useRef();
 
   const removeCateory = () => {
     console.log(categoryInfo);
@@ -31,7 +32,7 @@ function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
   };
   useEffect(() => {
     const handleClickOutSide = (e) => {
-      if (popUp.current && !popUp.current.contains(e.target)) {
+      if (popUp.current && !popUp.current.contains(e.target) && popModal.current  && !popModal.current.contains(e.target) ) {
         setOpen(false);
       }
     };
@@ -64,6 +65,7 @@ function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
 
       <div
         id="popup-modal"
+        ref={popModal}
         className={`${
           open ? "opacity-100 visible" : "opacity-0 invisible"
         } transition-colors || justify-center || items-center  || flex || duration-500 fixed top-0 bg-black/80 left-0 right-0 z-50  p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[100%] max-h-full`}
