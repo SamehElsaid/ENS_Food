@@ -65,11 +65,10 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
             })
 
             .then((res) => {
-              console.log(res);
               setRefersh(refersh + 1);
               setNum(num + 1);
               setEdit(false);
-              setSelectedImage(null)
+              setSelectedImage(null);
             })
             .catch((err) => {
               toast.error(err.message);
@@ -95,6 +94,24 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
         });
     }
   };
+  const removeMeal = (id) => {
+    axios
+      .delete(`${process.env.API_URL}/meals/${id}/`, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        setRefersh(refersh + 1);
+        setNum(num + 1);
+        setEdit(false);
+      })
+      .catch((err) => {
+        toast.error(err.message);
+      });
+  };
   return (
     <>
       {meal && (
@@ -104,9 +121,9 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
         >
           <div className="relative || group || h-[100px]">
             <Image
-              src={meal.image}
-              priority
-              blurDataURL={meal.image}
+              src={
+                selectedImage ? URL.createObjectURL(selectedImage) : meal.image
+              }
               fill
               sizes="100% ,100%"
               alt="sayed"
@@ -256,7 +273,10 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
                 Edit
               </span>
             )}
-            <span className="cursor-pointer || inline-block bg-red-600 || hover:bg-red-800 || duration-300 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2">
+            <span
+              onClick={() => removeMeal(meal.id)}
+              className="cursor-pointer || inline-block bg-red-600 || hover:bg-red-800 || duration-300 rounded-full px-3 py-1 text-sm font-semibold text-white mr-2 mb-2"
+            >
               Remove
             </span>
           </div>

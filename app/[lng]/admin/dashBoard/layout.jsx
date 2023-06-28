@@ -10,7 +10,6 @@ import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 import { RiMotorbikeLine } from "react-icons/ri";
 import { TbMoneybag } from "react-icons/tb";
-import Admin from "../../components/Admin/Admin";
 import dynamic from "next/dynamic";
 import { useSelector } from "react-redux";
 
@@ -27,6 +26,7 @@ function RootLayout({ children, params: { lng } }) {
   const [openDashBaord, setOpenDashBaord] = useState(false);
   const [categoryName, setCategoryName] = useState(false);
   const adminSlice = useSelector((redux) => redux.admin.num);
+  const categorySlice = useSelector((redux) => redux.category.refresh);
   const patchName = usePathname();
   const myRouter = patchName.split("/").at(-1);
   const Admin = dynamic(() => import("../../components/Admin/Admin"), {
@@ -41,7 +41,7 @@ function RootLayout({ children, params: { lng } }) {
       .catch((err) => {
         console.log(err.massage);
       });
-  }, []);
+  }, [categorySlice]);
   useEffect(() => {
     if (category) {
       if (patchName.includes("category")) {
@@ -58,7 +58,7 @@ function RootLayout({ children, params: { lng } }) {
         setIsOpen(false);
       }
     }
-  }, [patchName, category?.length]);
+  }, [patchName, category?.length, categorySlice, category]);
   useEffect(() => {
     const getCookieValue = (name) => {
       const cookies = document.cookie.split(";");
@@ -96,7 +96,7 @@ function RootLayout({ children, params: { lng } }) {
     }
   }, [adminSlice]);
   useEffect(() => {
-    if (isOpen) {
+    const timeOut = setTimeout(() => {
       if (categoryRef.current) {
         let height = 0;
         categoryRef.current.querySelectorAll(".cateChild").forEach((e) => {
@@ -104,8 +104,16 @@ function RootLayout({ children, params: { lng } }) {
         });
         setHeightCategory(height);
       }
-    }
-  }, [categoryRef.current, isOpen]);
+    }, 500);
+    return () => clearTimeout(timeOut);
+  }, [
+    categoryRef?.current,
+    isOpen,
+    category,
+    category?.length,
+    categorySlice,
+    patchName,
+  ]);
 
   return (
     <>
@@ -158,7 +166,9 @@ function RootLayout({ children, params: { lng } }) {
                     <div
                       onClick={() => setIsOpen(!isOpen)}
                       className={`${
-                        patchName.includes("category") ? "dashBoardUlActive" : ""
+                        patchName.includes("category")
+                          ? "dashBoardUlActive"
+                          : ""
                       } ${style.ulDashboard}   `}
                     >
                       <BiCategoryAlt className="text-2xl" />
@@ -174,6 +184,7 @@ function RootLayout({ children, params: { lng } }) {
                       className="absolute || overflow-hidden || transition-height || top-[100%] || w-full || left-0"
                       ref={categoryRef}
                     >
+                      
                       <Link
                         as={`/${
                           lng !== "ar" ? "en" : "ar"
@@ -181,7 +192,14 @@ function RootLayout({ children, params: { lng } }) {
                         href={`/${
                           lng !== "ar" ? "en" : "ar"
                         }/admin/dashBoard/category`}
-                        className={`liAnimation || font-semibold || text-sky-500 || cateChild liAnimationOpen text-[12px] flex items-center gap-2 py-1.5 px-4 border-b border-black hover:bg-[#122043] border-l-4 hover:border-l-sky-600 border-l-transparent transition-colors duration-300 cursor-pointer`}
+                        className={`${
+                          patchName ===
+                          "/" +
+                            (lng !== "ar" ? "en" : "ar") +
+                            "/admin/dashBoard/category"
+                            ? "dashBoardUlActive"
+                            : ""
+                        } liAnimation || font-semibold || text-sky-500 || cateChild liAnimationOpen text-[12px] flex items-center gap-2 py-1.5 px-4 border-b border-black hover:bg-[#122043] border-l-4 hover:border-l-sky-600 border-l-transparent transition-colors duration-300 cursor-pointer`}
                       >
                         Add Category
                       </Link>
@@ -211,19 +229,25 @@ function RootLayout({ children, params: { lng } }) {
                   </li>
                   <Link
                     as={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/order`}
-                    href={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/order`}
+                    href={`/${
+                      lng !== "ar" ? "en" : "ar"
+                    }/admin/dashBoard/order`}
                     className={`${
-                     patchName.includes("order") ? "dashBoardUlActive" : ""
+                      patchName.includes("order") ? "dashBoardUlActive" : ""
                     } ${style.ulDashboard}`}
                   >
                     <AiOutlineShoppingCart className="text-2xl" />
                     <h2>Orders</h2>
                   </Link>
                   <Link
-                    as={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/drivery`}
-                    href={`/${lng !== "ar" ? "en" : "ar"}/admin/dashBoard/drivery`}
+                    as={`/${
+                      lng !== "ar" ? "en" : "ar"
+                    }/admin/dashBoard/drivery`}
+                    href={`/${
+                      lng !== "ar" ? "en" : "ar"
+                    }/admin/dashBoard/drivery`}
                     className={`${
-                      patchName.includes("drivery")  ? "dashBoardUlActive" : ""
+                      patchName.includes("drivery") ? "dashBoardUlActive" : ""
                     } ${style.ulDashboard}`}
                   >
                     <RiMotorbikeLine className="text-2xl" />

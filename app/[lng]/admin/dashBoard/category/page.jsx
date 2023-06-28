@@ -1,9 +1,8 @@
-import React from 'react'
+import AddNewCategory from "@/app/[lng]/components/CategoryAdmin/AddNewCategory";
+import React from "react";
 
 function page() {
-  return (
-    <div>page</div>
-  )
+  return <AddNewCategory />;
 }
 
-export default page
+export default page;

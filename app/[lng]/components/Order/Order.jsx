@@ -1,8 +1,7 @@
 "use client";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import OrderItems from "./OrderItems";
-import { AiFillEye, AiOutlineEye } from "react-icons/ai";
+import {  AiOutlineEye } from "react-icons/ai";
 import { useRouter } from "next/navigation";
 
 function Order({ langWord,drivery }) {

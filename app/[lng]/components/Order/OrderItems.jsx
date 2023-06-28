@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { BsCheckAll } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
-function OrderItems({ item, drivery }) {
+function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loactionData, setLoactiondata] = useState("");
@@ -13,7 +13,6 @@ function OrderItems({ item, drivery }) {
   const [data, setData] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const categoryRef = useRef("");
-
   useEffect(() => {
     if (item) {
       if (item.items.length !== 0) {
@@ -67,7 +66,7 @@ function OrderItems({ item, drivery }) {
           });
       }
     }
-  }, [item]);
+  }, [item,refersh,drivery]);
   useEffect(() => {
     if (isOpen) {
       if (categoryRef.current) {
@@ -79,6 +78,20 @@ function OrderItems({ item, drivery }) {
       }
     }
   }, [categoryRef.current, item, data?.length, isOpen]);
+  const sendToDrivery =()=>{
+    axios
+      .patch(`${process.env.API_URL}/orders/${item.id}`, {
+        kind:"is_drivery"
+      },{
+        headers: {
+          Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+        },
+      }).then(res=>{
+        console.log(res.data);
+      }).catch(err=>{
+        console.log(err);
+      })
+  }
   return (
     <div className="relative">
       {item && (
@@ -90,7 +103,6 @@ function OrderItems({ item, drivery }) {
         >
           <div className="border-x  py-4 font-medium dark:border-neutral-500 w-[20%] max-w-[20%] ">
             {item.date.split(".")[0].split("T")[1]}
-            {console.log(item)}
           </div>
           <div className="border-r  py-4 dark:border-neutral-500 w-[20%] max-w-[20%] ">
             {item.phone}
@@ -117,6 +129,7 @@ function OrderItems({ item, drivery }) {
           {!drivery && (
             <div className=" border-r py-4 dark:border-neutral-500  w-[10%] max-w-[10%] ">
               <BsCheckAll
+              onClick={sendToDrivery}
                 className={`transition-transform || text-green-600 || hover:text-green-800 || duration-300 text-xl || mx-auto || cursor-pointer`}
               />
             </div>
