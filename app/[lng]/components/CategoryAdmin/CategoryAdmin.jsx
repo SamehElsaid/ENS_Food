@@ -29,6 +29,7 @@ function CategoryAdmin({ categoryAdmin, langWord }) {
         setRefersh={setRefersh}
         refersh={refersh}
         categoryInfo={categoryAdmin}
+        langWord={langWord}
       />
       <CategoryName
         setRefersh={setRefersh}

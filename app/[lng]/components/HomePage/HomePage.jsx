@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/swiper.min.css";
 import Skeleton from "../Skeleton/Skeleton";
@@ -43,7 +43,7 @@ function HomePage({
   const [loadingBtn, setLoadingBtn] = useState(true);
   const [num, setNum] = useState(0);
   const headerRef = useRef(null);
-  const router = useRouter()
+  const router = useRouter();
   const [sortedHeader, setShortHead] = useState(() => {
     if (data) {
       return [...data.data];
@@ -251,7 +251,7 @@ function HomePage({
               </h2>
             </div>
             <Link
-            //  replace
+              //  replace
               as={`/${lang}/map`}
               href={`/${lang}/map`}
               className="text-xl || text-mainColor || cursor-pointer || py-2 || pr-3"
@@ -313,112 +313,111 @@ function HomePage({
       )}
       {data ? (
         data.data.map((category, i) => (
-          <div className="head" id={category.id} key={category.id}>
-            <h2 className="text-[#392200] || relative || mt-8 || mx-4 || mb-4 || text-[32px] || font-bold">
-              <div
-                className={`${
-                  !loading
-                    ? "opacity-0"
-                    : "opacity-100 || transition-opacity || duration-300  || animate-pulse"
-                } absolute || w-full || top-0 || h-full || bg-gray-300`}
-              ></div>
-              <span
-                className={`${
-                  loading
-                    ? "opacity-0"
-                    : "opacity-100 || transition-opacity || duration-300"
-                }`}
-              >
-                {" "}
-                {category[`${lang}_name`]}
-              </span>
-            </h2>
-            {data.meal[i].data.map((meal) => (
-              <div
-                className={`${
-                  loacStorageCart &&
-                  loacStorageCart.find((ele) => ele.id === meal.id)
-                    ? "border-l-mainColor"
-                    : "border-transparent"
-                } || border-l-4 || pl-[12px] || pr-4 pb-[35px] || relative  || border-b || border-[#e0e0e0]`}
-                key={meal.id}
-              >
-                <Skeleton loading={loading} />
+          <Fragment  key={category.id}>
+            {data.meal[i].data.length !== 0 && (
+              <div className="head" id={category.id}>
+                <h2 className="text-[#392200] || relative || mt-8 || mx-4 || mb-4 || text-[32px] || font-bold">
+                  <div
+                    className={`${
+                      !loading
+                        ? "opacity-0"
+                        : "opacity-100 || transition-opacity || duration-300  || animate-pulse"
+                    } absolute || w-full || top-0 || h-full || bg-gray-300`}
+                  ></div>
+                  <span
+                    className={`${
+                      loading
+                        ? "opacity-0"
+                        : "opacity-100 || transition-opacity || duration-300"
+                    }`}
+                  >
+                    {" "}
+                    {category[`${lang}_name`]}
+                  </span>
+                </h2>
+                {data.meal[i].data.map((meal) => (
+                  <div
+                    className={`${
+                      loacStorageCart &&
+                      loacStorageCart.find((ele) => ele.id === meal.id)
+                        ? "border-l-mainColor"
+                        : "border-transparent"
+                    } || border-l-4 || pl-[12px] || pr-4 pb-[35px] || relative  || border-b || border-[#e0e0e0]`}
+                    key={meal.id}
+                  >
+                    <Skeleton loading={loading} />
+                    <Link
+                      as={`/${lang}/product/${category.id}/${meal.id}`}
+                      href={`/${lang}/product/${category.id}/${meal.id}`}
+                      className="flex || gap-2 || items-center"
+                    >
+                      <div className="w-full || py-[20px]">
+                        <p className="text-[18px] || mb-2 || font-semibold">
+                          {meal[`${lang}_name`]}
+                        </p>
+                        {meal[`${lang}_description`] && (
+                          <p className="text-[#6a3f01a6] || text-[14px] || font-semibold">
+                            {meal[`${lang}_description`]}
+                          </p>
+                        )}
+                      </div>
+                      <div className="relative || min-w-[100px] || h-[100px]">
+                        <Image
+                          src={meal.image}
+                          fill
+                          sizes="100% ,100%"
+                          alt={meal.id}
+                          style={{ objectFit: "contain" }}
+                        />
+                      </div>
+                    </Link>
+                    <div
+                      className={`${
+                        !loacalStorageLocation
+                          ? "opacity-0 || invisible"
+                          : "opacity-100 || transition-opacity || duration-300"
+                      }`}
+                    >
+                      <BtnHome>
+                        {loacalStorageLocation &&
+                        loacalStorageLocation === "no" ? (
+                          <Link
+                            as={`/${lang}/product/${category.id}/${meal.id}`}
+                            href={`/${lang}/product/${category.id}/${meal.id}`}
+                            className="px-[16px] || inline-block || py-[6px]"
+                          >
+                            {lang === "en" && price + " "}
+                            {meal.price}
+                            {lang !== "en" && " " + price}
+                          </Link>
+                        ) : (
+                          <button
+                            onClick={() => {
+                              SendToCart(meal, 1);
+                              setLoadingBtn(false);
+                              setNum(num + 1);
+                            }}
+                            className="px-[16px] || py-[6px]"
+                          >
+                            {lang === "en" && price + " "}
+                            {meal.price}
+                            {lang !== "en" && " " + price}
+                          </button>
+                        )}
+                      </BtnHome>
+                    </div>
+                  </div>
+                ))}
                 <Link
-                //  replace
-
-                  as={`/${lang}/product/${category.id}/${meal.id}`}
-                  href={`/${lang}/product/${category.id}/${meal.id}`}
-                  className="flex || gap-2 || items-center"
+                  as={`/${lang}/product/${category.id}`}
+                  href={`/${lang}/product/${category.id}`}
+                  className="box-shadow-edit-seeMore || block || mt-[-1px] || relative || bg-white || text-mainColor || text-center || text-sm || py-2 || font-semibold || cursor-pointer"
                 >
-                  <div className="w-full || py-[20px]">
-                    <p className="text-[18px] || mb-2 || font-semibold">
-                      {meal[`${lang}_name`]}
-                    </p>
-                    {meal[`${lang}_description`] && (
-                      <p className="text-[#6a3f01a6] || text-[14px] || font-semibold">
-                        {meal[`${lang}_description`]}
-                      </p>
-                    )}
-                  </div>
-                  <div className="relative || min-w-[100px] || h-[100px]">
-                    <Image
-                      src={meal.image}
-                      fill
-                      sizes="100% ,100%"
-                      alt={meal.id}
-                      style={{ objectFit: "contain" }}
-                    />
-                  </div>
+                  {seeMore}
                 </Link>
-                <div
-                  className={`${
-                    !loacalStorageLocation
-                      ? "opacity-0 || invisible"
-                      : "opacity-100 || transition-opacity || duration-300"
-                  }`}
-                >
-                  <BtnHome>
-                    {loacalStorageLocation && loacalStorageLocation === "no" ? (
-                      <Link
-                      //  replace
-
-                        as={`/${lang}/product/${category.id}/${meal.id}`}
-                        href={`/${lang}/product/${category.id}/${meal.id}`}
-                        className="px-[16px] || inline-block || py-[6px]"
-                      >
-                        {lang === "en" && price + " "}
-                        {meal.price}
-                        {lang !== "en" && " " + price}
-                      </Link>
-                    ) : (
-                      <button
-                        onClick={() => {
-                          SendToCart(meal, 1);
-                          setLoadingBtn(false);
-                          setNum(num + 1);
-                        }}
-                        className="px-[16px] || py-[6px]"
-                      >
-                        {lang === "en" && price + " "}
-                        {meal.price}
-                        {lang !== "en" && " " + price}
-                      </button>
-                    )}
-                  </BtnHome>
-                </div>
               </div>
-            ))}
-            <Link
-            //  replace
-
-              as={`/${lang}/product/${category.id}`}
-              href={`/${lang}/product/${category.id}`}
-              className="box-shadow-edit-seeMore || block || mt-[-1px] || relative || bg-white || text-mainColor || text-center || text-sm || py-2 || font-semibold || cursor-pointer"
-            >
-              {seeMore}
-            </Link>
-          </div>
+            )}
+          </Fragment>
         ))
       ) : (
         <div className="flex || h-screen || box-shadow-edit || mx-4 || justify-center || items-center || py-7 || flex-1">

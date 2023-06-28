@@ -99,7 +99,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
           });
           setSelectedImage(null);
         }}
-        className={`transition-marginUl text-xl || ${
+        className={`transition-marginUl text-sm md:text-xl || ${
           isOpen
             ? "text-red-600 hover:text-red-900"
             : "text-green-600 hover:text-green-800"
@@ -118,7 +118,7 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
             ? "bg-red-600 hover:bg-red-900"
             : "bg-green-600 hover:bg-green-800"
         } 
-            cursor-pointer || inline-block || duration-300 rounded-full px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2`}
+            cursor-pointer || inline-block || duration-300 rounded-full px-3 md:px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2`}
           >
             Add
           </button>
@@ -134,9 +134,9 @@ function AddNewMeal({ categoryInfo, refersh, setRefersh }) {
             e.preventDefault();
             updateNewProduct();
           }}
-          className="flex || gap-4 || items-center || my-5"
+          className="flex || flex-col-reverse || md:flex-row || gap-4 || items-center || my-5"
         >
-          <div className="rounded  overflow-hidden w-[40%] shadow-lg || flex || flex-col || gap-4 || px-6 || py-4 || justify-between">
+          <div className="rounded  overflow-hidden w-full md:w-[70%] lg:w-[40%] shadow-lg || flex || flex-col || gap-4 || px-6 || py-4 || justify-between">
             <div className="">
               <div className="relative h-10 w-full min-w-[200px]">
                 <input

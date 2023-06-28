@@ -117,9 +117,9 @@ function MealAdmin({ meal, langWord, refersh, setRefersh }) {
       {meal && (
         <div
           key={meal.id}
-          className="rounded overflow-hidden shadow-lg || w-[calc(100%/4-12px)] || flex || flex-col || gap-4 || px-6 || py-4 || justify-between"
+          className="rounded overflow-hidden shadow-lg || w-full || md:w-[calc(100%/2-8px)] || lg:w-[calc(100%/4-12px)] || flex || flex-col || gap-4 || px-6 || py-4 || justify-between"
         >
-          <div className="relative || group || h-[100px]">
+          <div className="relative || group ||  h-[150px]">
             <Image
               src={
                 selectedImage ? URL.createObjectURL(selectedImage) : meal.image

@@ -6,7 +6,7 @@ import OrderItems from "./OrderItems";
 function ShowOrderWithDate({ order, drivery }) {
   const [data, setData] = useState(false);
   const [totalprice, setTotalprice] = useState(0);
-  const [refersh,setRefersh]=useState(0)
+  const [refersh, setRefersh] = useState(0);
 
   useEffect(() => {
     axios
@@ -44,12 +44,12 @@ function ShowOrderWithDate({ order, drivery }) {
         }
       })
       .catch((err) => console.log(err));
-  }, [order,refersh]);
+  }, [order, refersh]);
   return (
     <div className="">
       {data && data.length !== 0 ? (
         <>
-          <div className="border-b sticky || top-[-0.75rem] z-20 font-medium dark:border-neutral-500 bg-neutral-800 || text-white || flex || text-center">
+          <div className="border-b sticky || hidden lg:flex | | top-[-0.75rem] z-20 font-medium dark:border-neutral-500 bg-neutral-800 || text-white  || text-center">
             <div
               scope="col"
               className="border-r py-4 border-gray-500 || w-[20%] max-w-[20%]"

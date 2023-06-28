@@ -42,7 +42,7 @@ function AddNewCategory() {
       }}
       className="flex || gap-4 || items-center || justify-center || my-5"
     >
-      <div className="rounded  overflow-hidden w-[40%] shadow-lg || flex || flex-col || gap-4 || px-6 || py-4 || justify-between">
+      <div className="rounded  overflow-hidden w-full md:w-[70%] lg:w-[40%] shadow-lg || flex || flex-col || gap-4 || px-6 || py-4 || justify-between">
         <div className="">
           <div className="relative h-10 w-full min-w-[200px]">
             <input

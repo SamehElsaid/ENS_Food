@@ -5,7 +5,7 @@ import { toast } from "react-hot-toast";
 import { BsCheckAll } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
-function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
+function OrderItems({ item, drivery, totalprice, refersh, setRefersh }) {
   const [totalItems, setTotalItems] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
   const [loactionData, setLoactiondata] = useState("");
@@ -24,7 +24,8 @@ function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
           .then((response) => response.json())
           .then((data) => {
             setLoactiondata(data.results[0].formatted);
-          }).catch(err=>toast.error("eroo"))
+          })
+          .catch((err) => toast.error("eroo"));
         const newData = item.items.map(async (order) => {
           try {
             const res = await axios.get(
@@ -66,7 +67,7 @@ function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
           });
       }
     }
-  }, [item,refersh,drivery]);
+  }, [item, refersh, drivery]);
   useEffect(() => {
     if (isOpen) {
       if (categoryRef.current) {
@@ -78,20 +79,26 @@ function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
       }
     }
   }, [categoryRef.current, item, data?.length, isOpen]);
-  const sendToDrivery =()=>{
+  const sendToDrivery = () => {
     axios
-      .patch(`${process.env.API_URL}/orders/${item.id}`, {
-        kind:"is_drivery"
-      },{
-        headers: {
-          Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+      .patch(
+        `${process.env.API_URL}/orders/${item.id}`,
+        {
+          kind: "is_drivery",
         },
-      }).then(res=>{
+        {
+          headers: {
+            Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+          },
+        }
+      )
+      .then((res) => {
         console.log(res.data);
-      }).catch(err=>{
-        console.log(err);
       })
-  }
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div className="relative">
       {item && (
@@ -99,39 +106,50 @@ function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
           style={{ marginBottom: isOpen ? itemsHight + "px" : 0 }}
           className={`border-b transition-marginUl dark:border-neutral-500 hover:bg-gray-200  ${
             isOpen ? " bg-gray-200" : ""
-          }  || relative flex text-center`}
+          }  || relative flex text-center || flex-col ||  lg:flex-row`}
         >
-          <div className="border-x  py-4 font-medium dark:border-neutral-500 w-[20%] max-w-[20%] ">
-            {item.date.split(".")[0].split("T")[1]}
+          <div className="lg:border-x  py-4 font-medium dark:border-neutral-500 lg:w-[20%] lg:max-w-[20%] flex || justify-between || flex-col || sm:flex-row  lg:justify-center ">
+            <span className="lg:hidden">Time</span>
+            <span>{item.date.split(".")[0].split("T")[1]}</span>
           </div>
-          <div className="border-r  py-4 dark:border-neutral-500 w-[20%] max-w-[20%] ">
-            {item.phone}
+          <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[20%] lg:max-w-[20%] flex || justify-between || flex-col || sm:flex-row  lg:justify-center">
+            <span className="lg:hidden">Number</span>
+            <span>{item.phone}</span>
           </div>
-          <div className="border-r  py-4 dark:border-neutral-500 w-[30%] max-w-[30%] ">
-            {loactionData.replaceAll("unnamed road,", "")}
+          <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[30%] lg:max-w-[30%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
+            <span className="lg:hidden">Location</span>
+            <span>{loactionData.replaceAll("unnamed road,", "")}</span>
+          </div>
+          <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
+            <span className="lg:hidden">Items</span>
+            <span>{totalItems}</span>
           </div>
           {drivery && (
-            <div className="border-r  py-4 dark:border-neutral-500 w-[10%] max-w-[10%] ">
-              {totalItems}
+            <div className="lg:border-r  py-4 dark:border-neutral-500 lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
+              <span className="lg:hidden">Total Price</span>
+              <span>{totalPrice}</span>
             </div>
           )}
-          <div className="border-r  py-4 dark:border-neutral-500 w-[10%] max-w-[10%] ">
-            {totalPrice}
-          </div>
-          <div className=" border-r py-4 dark:border-neutral-500  w-[10%] max-w-[10%] ">
-            <IoIosArrowDown
-              onClick={() => setIsOpen(!isOpen)}
-              className={`${
-                isOpen ? "rotate-180" : "rotate-0"
-              } transition-transform || duration-300 text-xl || mx-auto || cursor-pointer`}
-            />
+          <div className=" lg:border-r py-4 dark:border-neutral-500  lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
+            <span className="lg:hidden">Details</span>
+            <span>
+              <IoIosArrowDown
+                onClick={() => setIsOpen(!isOpen)}
+                className={`${
+                  isOpen ? "rotate-180" : "rotate-0"
+                } transition-transform || duration-300 text-xl || mx-auto || cursor-pointer`}
+              />
+            </span>
           </div>
           {!drivery && (
-            <div className=" border-r py-4 dark:border-neutral-500  w-[10%] max-w-[10%] ">
-              <BsCheckAll
-              onClick={sendToDrivery}
-                className={`transition-transform || text-green-600 || hover:text-green-800 || duration-300 text-xl || mx-auto || cursor-pointer`}
-              />
+            <div className=" lg:border-r py-4 dark:border-neutral-500  lg:w-[10%] lg:max-w-[10%] flex || justify-between || flex-col || sm:flex-row lg:justify-center">
+              <span className="lg:hidden">Drivery</span>
+              <span>
+                <BsCheckAll
+                  onClick={sendToDrivery}
+                  className={`transition-transform || text-green-600 || hover:text-green-800 || duration-300 text-xl || mx-auto || cursor-pointer`}
+                />
+              </span>
             </div>
           )}
         </div>
@@ -147,20 +165,20 @@ function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
           <span className="border-b cateChild font-medium dark:border-neutral-500 bg-mainColor || text-white || flex">
             <span
               scope="col"
-              className="border-r px-6 py-4 border-gray-500 || w-full "
+              className="border-r px-6 py-4 border-gray-500 || w-[50%] "
             >
               Name
             </span>
             <span
               scope="col"
-              className="border-r px-6 py-4 border-gray-500 || w-full "
+              className="border-r px-6 py-4 border-gray-500 || w-[50%] "
             >
               Quantity
             </span>
             {drivery && (
               <span
                 scope="col"
-                className="border-r px-6 py-4 border-gray-500 || w-full "
+                className="border-r px-6 py-4 border-gray-500 || w-[50%] "
               >
                 Price
               </span>
@@ -172,14 +190,14 @@ function OrderItems({ item, drivery ,totalprice,refersh,setRefersh}) {
                 key={i}
                 className="border-b dark:border-neutral-500 || flex"
               >
-                <span className="whitespace-nowrap border-r px-6 py-4 font-medium dark:border-neutral-500 w-full ">
+                <span className=" border-r px-6 py-4 font-medium dark:border-neutral-500 w-[50%] ">
                   {ele.en_name}
                 </span>
-                <span className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 w-full ">
+                <span className=" border-r px-6 py-4 dark:border-neutral-500 w-[50%] ">
                   {ele.quantity}
                 </span>
                 {drivery && (
-                  <span className="whitespace-nowrap border-r px-6 py-4 dark:border-neutral-500 w-full ">
+                  <span className=" border-r px-6 py-4 dark:border-neutral-500 w-[50%] ">
                     {ele.quantity * ele.price}
                   </span>
                 )}

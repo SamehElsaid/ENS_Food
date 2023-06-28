@@ -1,12 +1,50 @@
-import React, { useState } from "react";
+import { REFRESH_CATEGORY } from "@/redux/CategorySlice/CategorySlice";
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-function RemoveCateory() {
+function RemoveCateory({ categoryInfo, refersh, setRefersh, langWord }) {
   const [open, setOpen] = useState(false);
+  const categorySlice = useSelector((redux) => redux.category.refresh);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const popUp = useRef();
+  const removeCateory = () => {
+    console.log(categoryInfo);
+    console.log(langWord);
+    axios
+      .delete(`${process.env.API_URL}/category/${categoryInfo}/`, {
+        headers: {
+          Authorization: "token b1d06b08324a1cb0256650a02b6d7958813bb6e0",
+        },
+      })
+      .then((res) => {
+        router.push(`/${langWord.lang}/admin/dashBoard/category/11`);
+        dispatch(REFRESH_CATEGORY(categorySlice + 1));
+        setRefersh(refersh + 1);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+  useEffect(() => {
+    const handleClickOutSide = (e) => {
+      if (popUp.current && !popUp.current.contains(e.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutSide);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutSide);
+    };
+  }, [popUp]);
   return (
     <div className="relative">
       <div
+        ref={popUp}
         onClick={() => setOpen(!open)}
-        className={`transition-marginUl text-xl ||text-green-600 hover:text-green-800 || flex || items-center || gap-2 || my-4 || cursor-pointer || font-semibold || justify-between`}
+        className={`transition-marginUl text-sm md:text-xl ||text-green-600 hover:text-green-800 || flex || items-center || gap-2 || pt-4 || cursor-pointer || font-semibold || justify-between`}
       >
         <div className="flex || gap-2 || items-center">
           <span>Remove This Cateory</span>
@@ -14,7 +52,7 @@ function RemoveCateory() {
         <div className="">
           <button
             className={`
-            bg-orange-600 hover:bg-orange-800     cursor-pointer || inline-block || duration-300 rounded-full px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2`}
+            bg-orange-600 hover:bg-orange-800     cursor-pointer || inline-block || duration-300 rounded-full px-3 md:px-10 py-2.5 text-sm font-semibold text-white mr-2 mb-2`}
           >
             Remove
           </button>
@@ -25,7 +63,7 @@ function RemoveCateory() {
         id="popup-modal"
         className={`${
           open ? "opacity-100 visible" : "opacity-0 invisible"
-        } transition-colors || justify-center || items-center || flex || duration-500 fixed top-1/2 bg-black/80 left-0 right-0 z-50  p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[100%] max-h-full`}
+        } transition-colors || justify-center || items-center  || flex || duration-500 fixed top-0 bg-black/80 left-0 right-0 z-50  p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[100%] max-h-full`}
       >
         <div className="relative w-full max-w-md max-h-full">
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-700">
@@ -68,7 +106,7 @@ function RemoveCateory() {
                 Are you sure you want to delete this product?
               </h3>
               <button
-                data-modal-hide="popup-modal"
+                onClick={removeCateory}
                 type="button"
                 className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2"
               >
